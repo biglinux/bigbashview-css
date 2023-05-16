@@ -1,23 +1,28 @@
 #!/bin/bash
 
-#use:
-#switch checked xpto.run
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    -c <checked>        variable: unchecked, checked, disabled, checked disabled'
+    echo '    -r <file.run>       '
+    echo ''
+    exit $1
+}
 
-#checked, disabled, disabled-checked, unchecked
-if [ "$1" = "unchecked" ];then
-	checked=Default
-elif [ "$1" = "checked" ];then
-	checked=Checked
-elif [ "$1" = "disabled" ];then
-	checked=Disabled
-elif [ "$1" = "disabled-checked" ];then
-	checked="checked disabled"
-else
-	checked=
-fi
-	
+orig_argv=("$@")
+
+opts='c:r:h:'
+
+while getopts "${opts}" arg; do
+    case "${arg}" in
+        c) checked="$OPTARG" ;;
+        r) run="$OPTARG" ;;
+        h|?) usage 0 ;;
+        *) echo "invalid argument '${arg}'"; usage 1 ;;
+    esac
+done
+
 cat << EOF
 <div class="form-check form-switch">
-  <input onclick="_run('./$2')" class="form-check-input" type="checkbox" role="switch" $checked>
+  <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" $checked>
 </div>
 EOF

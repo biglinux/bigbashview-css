@@ -1,0 +1,44 @@
+#!/bin/bash
+# start_html: Inicia um documento HTML.
+
+sage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    -t <title>        '
+    echo '    -r <icon.svg>     '
+    echo ''
+    exit $1
+}
+
+orig_argv=("$@")
+
+opts='t:i:h:'
+
+while getopts "${opts}" arg; do
+    case "${arg}" in
+        t) title="$OPTARG" ;;
+        i) icon="$OPTARG" ;;
+        h|?) usage 0 ;;
+        *) echo "invalid argument '${arg}'"; usage 1 ;;
+    esac
+done
+
+start () {
+cat << EOF
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+    <meta charset='UTF-8'>
+	    <meta name='viewport' content='width=device-width, initial-scale=1'>
+	    <title>${title}</title>
+	    <link rel='icon' href='${icon}'>
+	    <link rel="stylesheet" href="/usr/share/bigbashview/bcc/css/bootstrap-biglinux.css">
+		<link rel="stylesheet" href="/usr/share/javascript/bootstrap/css/bootstrap.css">
+    </head>"
+EOF
+}
+
+end () {
+cat << EOF
+</html>
+EOF
+}
