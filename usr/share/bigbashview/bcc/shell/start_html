@@ -41,7 +41,7 @@ while (( "$#" )); do
             shift
             title="$1"
             ;;
-        -r)
+        -i)
             shift
             icon="$1"
             ;;
