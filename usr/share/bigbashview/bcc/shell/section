@@ -1,6 +1,4 @@
 #!/bin/bash
-# start_html: Start HTML document.
-# 2023/16/05
 
 # Function to start the HTML document
 start() {
@@ -16,11 +14,18 @@ end() {
 EOF
 }
 
+text5() {
+cat << EOF
+<h5 class="mb-2 mt-3 mx-5">${text}</h5>
+EOF
+}
+
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    start'
     echo '    end'
+    echo '    -t5 <text>       '
     echo ''
     exit $1
 }
@@ -33,6 +38,11 @@ while (( "$#" )); do
             ;;
         end)
             end_called=true
+            ;;
+        -t5)
+            shift
+            text="$1"
+            text5=true
             ;;
         *)
             usage 1
@@ -47,4 +57,7 @@ if [ "$start_called" = "true" ]; then
 # Check if end function should be called
 elif [ "$end_called" = "true" ]; then
     end
+fi
+if [ "$text5" = "true" ]; then
+    text5
 fi
