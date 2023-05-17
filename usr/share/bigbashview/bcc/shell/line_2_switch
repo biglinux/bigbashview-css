@@ -49,9 +49,9 @@ done
 
 cat << EOF
 <section class="box">
-    <div class="row align-items-center bg-secondary text-white rounded-top p-3 mt-4 mx-5 border">
-        <div class="col .col-sm-8">
-            <label class="form-check-label text-body cursor-pointer" for="flexSwitchCheckDefault">${text}</label>
+    <div class="row align-items-center bg-secondary text-white rounded p-3 mt-4 mx-5 border">
+        <div class="col .col-sm-8 d-flex align-items-center">
+            <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${text}</label>
         </div>
         <div class="col-6 col-sm-4 d-flex justify-content-end">
             <form class="form-check form-switch">
