@@ -15,6 +15,7 @@ start() {
         <link rel="stylesheet" href="/usr/share/bigbashview/bcc/css/bootstrap-biglinux.css">
         <link rel="stylesheet" href="/usr/share/javascript/bootstrap/css/bootstrap.css">
     </head>
+    <body>
 EOF
 }
 
@@ -29,7 +30,7 @@ EOF
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -t <title>'
-    echo '    -r <icon.svg>'
+    echo '    -i <icon.svg>'
     echo ''
     exit $1
 }
