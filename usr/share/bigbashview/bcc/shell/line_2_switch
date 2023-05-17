@@ -51,7 +51,7 @@ cat << EOF
 <section class="box">
     <div class="row align-items-center bg-secondary text-white rounded-top p-3 mt-4 mx-5 border">
         <div class="col-sm">
-            <label class="form-check-label cursor-pointer" for="flexSwitchCheckDefault">${text}</label>
+            <label class="form-check-label text-body cursor-pointer" for="flexSwitchCheckDefault">${text}</label>
         </div>
         <div class="col-sm d-flex justify-content-end">
             <form class="form-check form-switch">

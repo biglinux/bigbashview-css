@@ -41,7 +41,7 @@ cat << EOF
 <div class="row align-items-center bg-secondary text-white rounded-top p-3 mx-5 border">
     <div class="col-sm">
         <img src="./${icon}" width="30px" height="30px" class="mx-2"/>
-        <label class="form-check-label cursor-pointer" for="flexSwitchCheckDefault">${text}</label>
+        <label class="form-check-label text-body cursor-pointer" for="flexSwitchCheckDefault">${text}</label>
     </div>
     <div class="col-sm d-flex justify-content-end">
         <form class="form-check form-switch">

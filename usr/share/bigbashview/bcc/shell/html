@@ -15,7 +15,7 @@ start() {
         <link rel="stylesheet" href="/usr/share/bigbashview/bcc/css/bootstrap-biglinux.css">
         <link rel="stylesheet" href="/usr/share/javascript/bootstrap/css/bootstrap.css">
     </head>
-    <body>
+    <body class="bg-primary">
 EOF
 }
 
