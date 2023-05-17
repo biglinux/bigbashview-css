@@ -39,6 +39,11 @@ cat << EOF
 <h5 class="mb-2 mt-3 mx-5">${text}</h5>
 EOF
 }
+text6() {
+cat << EOF
+<h6 class="mb-2 mt-3 mx-5">${text}</h6>
+EOF
+}
 
 # Function to display usage message
 usage() {
@@ -50,6 +55,7 @@ usage() {
     echo '    -t3 <text>       '
     echo '    -t4 <text>       '
     echo '    -t5 <text>       '
+    echo '    -t6 <text>       '
     echo ''
     exit $1
 }
@@ -88,6 +94,11 @@ while (( "$#" )); do
             text="$1"
             text5=true
             ;;
+        -t6)
+            shift
+            text="$1"
+            text6=true
+            ;;
         *)
             usage 1
             ;;
@@ -103,17 +114,20 @@ elif [ "$end_called" = "true" ]; then
     end
 fi
 if [ "$text1" = "true" ]; then
-    text5
+    text1
 fi
 if [ "$text2" = "true" ]; then
-    text5
+    text2
 fi
 if [ "$text3" = "true" ]; then
-    text5
+    text3
 fi
 if [ "$text4" = "true" ]; then
-    text5
+    text4
 fi
 if [ "$text5" = "true" ]; then
     text5
+fi
+if [ "$text6" = "true" ]; then
+    text6
 fi
