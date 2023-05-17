@@ -46,10 +46,10 @@ while (( "$#" )); do
             icon="$1"
             ;;
         -s|start)
-            start
+            start_called=true
             ;;
         end)
-            end
+            end_called=true
             ;;
         *)
             usage 1
@@ -57,3 +57,11 @@ while (( "$#" )); do
     esac
     shift
 done
+
+# Check if start function should be called
+if [ "$start_called" = true ]; then
+    start
+# Check if end function should be called
+elif [ "$end_called" = "true" ]; then
+    end
+fi
