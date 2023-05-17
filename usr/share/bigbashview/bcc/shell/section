@@ -14,6 +14,26 @@ end() {
 EOF
 }
 
+text1() {
+cat << EOF
+<h1 class="mb-2 mt-3 mx-5">${text}</h1>
+EOF
+}
+text2() {
+cat << EOF
+<h2 class="mb-2 mt-3 mx-5">${text}</h2>
+EOF
+}
+text3() {
+cat << EOF
+<h3 class="mb-2 mt-3 mx-5">${text}</h3>
+EOF
+}
+text4() {
+cat << EOF
+<h4 class="mb-2 mt-3 mx-5">${text}</h4>
+EOF
+}
 text5() {
 cat << EOF
 <h5 class="mb-2 mt-3 mx-5">${text}</h5>
@@ -25,6 +45,10 @@ usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    start'
     echo '    end'
+    echo '    -t1 <text>       '
+    echo '    -t2 <text>       '
+    echo '    -t3 <text>       '
+    echo '    -t4 <text>       '
     echo '    -t5 <text>       '
     echo ''
     exit $1
@@ -38,6 +62,26 @@ while (( "$#" )); do
             ;;
         end)
             end_called=true
+            ;;
+        -t1)
+            shift
+            text="$1"
+            text1=true
+            ;;
+        -t2)
+            shift
+            text="$1"
+            text2=true
+            ;;
+        -t3)
+            shift
+            text="$1"
+            text3=true
+            ;;
+        -t4)
+            shift
+            text="$1"
+            text4=true
             ;;
         -t5)
             shift
@@ -57,6 +101,18 @@ if [ "$start_called" = "true" ]; then
 # Check if end function should be called
 elif [ "$end_called" = "true" ]; then
     end
+fi
+if [ "$text1" = "true" ]; then
+    text5
+fi
+if [ "$text2" = "true" ]; then
+    text5
+fi
+if [ "$text3" = "true" ]; then
+    text5
+fi
+if [ "$text4" = "true" ]; then
+    text5
 fi
 if [ "$text5" = "true" ]; then
     text5
