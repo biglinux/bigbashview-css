@@ -1,0 +1,50 @@
+#!/bin/bash
+# start_html: Start HTML document.
+# 2023/16/05
+
+# Function to start the HTML document
+start() {
+    cat << EOF
+<section class="box mt-4">
+EOF
+}
+
+# Function to end the HTML document
+end() {
+    cat << EOF
+</section>
+EOF
+}
+
+# Function to display usage message
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    start'
+    echo '    end'
+    echo ''
+    exit $1
+}
+
+# Loop to process command-line arguments
+while (( "$#" )); do
+    case "$1" in
+        -s|start)
+            start_called=true
+            ;;
+        end)
+            end_called=true
+            ;;
+        *)
+            usage 1
+            ;;
+    esac
+    shift
+done
+
+# Check if start function should be called
+if [ "$start_called" = "true" ]; then
+    start
+# Check if end function should be called
+elif [ "$end_called" = "true" ]; then
+    end
+fi
