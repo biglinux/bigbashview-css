@@ -5,8 +5,10 @@ usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -t <text>'
     echo '    -i <icon.svg>'
-    echo '    -c <checked>        variable: unchecked, checked, disabled, checked disabled'
-    echo '    -r <file.run>       '
+    echo '    -c1 <checked>        variable: unchecked, checked, disabled, checked disabled'
+    echo '    -c2 <checked>        variable: unchecked, checked, disabled, checked disabled'
+    echo '    -r1 <file.run>       '
+    echo '    -r2 <file.run>       '
     echo ''
     exit $1
 }
@@ -49,13 +51,14 @@ cat << EOF
 <section class="box">
     <div class="row align-items-center bg-secondary text-white rounded-top p-3 mt-4 mx-5 border">
         <div class="col-sm">
-            <img src="./${icon}" width="30px" height="30px" class="mx-2"/>
             <label class="form-check-label cursor-pointer" for="flexSwitchCheckDefault">${text}</label>
         </div>
         <div class="col-sm d-flex justify-content-end">
             <form class="form-check form-switch">
-            <input onclick="_run('./$run1')" class="form-check-input" type="checkbox" role="switch" ${checked1}>
-            <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" ${checked2}>
+                <input onclick="_run('./$run1')" class="form-check-input" type="checkbox" role="switch" ${checked1}>
+            </form>
+            <form class="form-check form-switch">
+                <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" ${checked2}>
             </form>
         </div>
     </div>
