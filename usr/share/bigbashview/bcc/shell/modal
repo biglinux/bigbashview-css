@@ -1,0 +1,92 @@
+#!/bin/bash
+start() {
+cat << EOF
+<!-- Modal -->
+<div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="${id}Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="${id}Label">${title}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+EOF
+}
+end() {
+cat << EOF
+</div>
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-${buttonType}" data-bs-dismiss="modal">Close</button> -->
+<!--       </div> -->
+    </div>
+  </div>
+</div>
+EOF
+}
+body() {
+	bash ${run}
+}
+
+
+# Function to display usage message
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    -start                '
+    echo '    -end                  '
+    echo '    -title <title>        '
+    echo '    -icon <icon.svg>      '
+    echo ''
+    exit $1
+}
+
+# Loop to process command-line arguments
+while (( "$#" )); do
+    case "$1" in
+        -title)
+            shift
+            title="$1"
+            ;;
+        -icon)
+            shift
+            icon="$1"
+            ;;
+        -id)
+            shift
+            id="$1"
+            ;;
+        -buttonType)
+            shift
+            buttonType="$1"
+            ;;
+        -run)
+            shift
+            run="$1"
+            ;;
+        -s|start)
+            start_called=true
+            ;;
+        end)
+            end_called=true
+            ;;
+        body)
+	        body_called=true
+            ;;
+        *)
+            usage 1
+            ;;
+    esac
+    shift
+done
+
+# Check if start function should be called
+if [ "$start_called" = "true" ]; then
+    start
+# Check if end function should be called
+elif [ "$end_called" = "true" ]; then
+    end
+fi
+
+# Chaeck if body function should be called
+if [ "$body_called" = "true" ]; then
+    body
+fi

@@ -63,7 +63,7 @@ while (( "$#" )); do
 done
 
 # Check if start function should be called
-if [ "$start_called" = true ]; then
+if [ "$start_called" = "true" ]; then
     start
 # Check if end function should be called
 elif [ "$end_called" = "true" ]; then
