@@ -2,27 +2,64 @@
 
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -c <checked>        variable: unchecked, checked, disabled, checked disabled'
-    echo '    -r <file.run>       '
+    echo '    -topText <text>          text to the left of the switch'
+    echo '    -rightText <text>         text to the right of the switch'
+    echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
+    echo '    -run <file.run>           File to be executed when clicking the button'
+    echo '    -fontSize <number>        1~6'
     echo ''
     exit $1
 }
 
-orig_argv=("$@")
-
-opts='c:r:h:'
-
-while getopts "${opts}" arg; do
-    case "${arg}" in
-        c) checked="$OPTARG" ;;
-        r) run="$OPTARG" ;;
-        h|?) usage 0 ;;
-        *) echo "invalid argument '${arg}'"; usage 1 ;;
+# Loop to process command-line arguments
+while (( "$#" )); do
+    case "$1" in
+        -topText)
+            shift
+            topText="$1"
+            topTextOn="true"
+            ;;
+        -rightText)
+            shift
+            rightText="$1"
+            rightTextOn="true"
+            ;;
+        -check)
+            shift
+            check="$1"
+            ;;
+        -run)
+            shift
+            run="$1"
+            ;;
+        -fontSize)
+            shift
+            fontSize="$1"
+            ;;
+        *)
+            usage 1
+            ;;
     esac
+    shift
 done
+
+if [ "$topTextOn" = "true" ];then
+cat << EOF
+    <span class="text-start ${fontSize}">${topText}</span>
+EOF
+fi
 
 cat << EOF
 <div class="form-check form-switch">
   <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" $checked>
+EOF
+
+if [ "$rightTextOn" = "true" ];then
+cat << EOF
+    <span class="text-start ${fontSize}">${rightText}</span>
+EOF
+fi
+cat << EOF
+</div>
 </div>
 EOF

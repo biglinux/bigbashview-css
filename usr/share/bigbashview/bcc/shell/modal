@@ -27,7 +27,6 @@ body() {
 	bash ${run}
 }
 
-
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"

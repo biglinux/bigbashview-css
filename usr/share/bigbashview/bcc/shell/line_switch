@@ -3,7 +3,7 @@
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -text <text>              Line text'
+    echo '    -lineText <text>          Line text'
     echo '    -icon <icon.svg>          Icon file'
     echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
     echo '    -run <file.run>           File to be executed when clicking the button'
@@ -14,9 +14,9 @@ usage() {
 # Loop to process command-line arguments
 while (( "$#" )); do
     case "$1" in
-        -text)
+        -lineText)
             shift
-            text="$1"
+            lineText="$1"
             ;;
         -icon)
             shift
@@ -47,7 +47,7 @@ cat << EOF
 EOF
 fi
 cat << EOF
-        <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${text}</label>
+        <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${lineText}</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
         <form class="form-check form-switch">
