@@ -5,7 +5,8 @@ usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -text <text>              Line text'
     echo '    -icon <icon.svg>          Icon file'
-    echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
+    echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    -buttonText <text>        Button text'
     echo '    -run <file.run>           File to be executed when clicking the button'
     echo ''
     exit $1
@@ -22,9 +23,13 @@ while (( "$#" )); do
             shift
             icon="$1"
             ;;
-        -check)
+        -buttonType)
             shift
-            check="$1"
+            buttonType="$1"
+            ;;
+        -buttonText)
+            shift
+            buttonText="$1"
             ;;
         -run)
             shift
@@ -40,19 +45,14 @@ done
 cat << EOF
 <div class="row align-items-center bg-secondary text-white rounded py-3  mx-5 border">
     <div class="col .col-sm-8 d-flex align-items-center">
-EOF
-if [ -e "${icon}" ];then
-cat << EOF
-    <img src="./${icon}" width="20px" height="20px" class="mx-1"/>
-EOF
-fi
-cat << EOF
+        <img src="./${icon}" width="20px" height="20px" class="mx-1"/>
         <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${text}</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
         <form class="form-check form-switch">
-        <input onclick="_run('./${run}')" class="form-check-input" type="checkbox" role="switch" ${check}>
+        <button onclick="_run('./${run}')" type="button" class="btn btn-${buttonType}">${buttonText}</button>
         </form>
     </div>
 </div>
 EOF
+

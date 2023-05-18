@@ -1,7 +1,0 @@
-#!/bin/bash
-
-function start() {
-    echo "<!DOCTYPE html>"
-    echo "<html lang='en'>"
-}
-# $1

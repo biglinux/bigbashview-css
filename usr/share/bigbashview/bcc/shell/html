@@ -14,6 +14,7 @@ start() {
         <link rel='icon' href='${icon}'>
         <link rel="stylesheet" href="/usr/share/bigbashview/bcc/css/bootstrap-biglinux.css">
         <link rel="stylesheet" href="/usr/share/javascript/bootstrap/css/bootstrap.css">
+        <script src="/usr/share/javascript/bootstrap/js/bootstrap.bundle.js"></script>
     </head>
     <body class="bg-primary">
 EOF
@@ -29,8 +30,10 @@ EOF
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -t <title>'
-    echo '    -i <icon.svg>'
+    echo '    -start                '
+    echo '    -end                  '
+    echo '    -title <title>        '
+    echo '    -icon <icon.svg>      '
     echo ''
     exit $1
 }
@@ -38,11 +41,11 @@ usage() {
 # Loop to process command-line arguments
 while (( "$#" )); do
     case "$1" in
-        -t)
+        -title)
             shift
             title="$1"
             ;;
-        -i)
+        -icon)
             shift
             icon="$1"
             ;;

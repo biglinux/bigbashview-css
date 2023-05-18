@@ -48,14 +48,14 @@ EOF
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    start'
-    echo '    end'
-    echo '    -t1 <text>       '
-    echo '    -t2 <text>       '
-    echo '    -t3 <text>       '
-    echo '    -t4 <text>       '
-    echo '    -t5 <text>       '
-    echo '    -t6 <text>       '
+    echo '    start             '
+    echo '    end               '
+    echo '    -textH1 <text>        '
+    echo '    -textH2 <text>        '
+    echo '    -textH3 <text>        '
+    echo '    -textH4 <text>        '
+    echo '    -textH5 <text>        '
+    echo '    -textH6 <text>        '
     echo ''
     exit $1
 }
@@ -69,32 +69,32 @@ while (( "$#" )); do
         end)
             end_called=true
             ;;
-        -t1)
+        -textH1)
             shift
             text="$1"
             text1=true
             ;;
-        -t2)
+        -textH2)
             shift
             text="$1"
             text2=true
             ;;
-        -t3)
+        -textH3)
             shift
             text="$1"
             text3=true
             ;;
-        -t4)
+        -textH4)
             shift
             text="$1"
             text4=true
             ;;
-        -t5)
+        -textH5)
             shift
             text="$1"
             text5=true
             ;;
-        -t6)
+        -textH6)
             shift
             text="$1"
             text6=true
