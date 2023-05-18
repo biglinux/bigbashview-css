@@ -3,11 +3,14 @@
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -t <text>         Line text'
-    echo '    -i <icon.svg>     icon file'
-    echo '    -b <type>         variable: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    -bt <text>        Button text'
-    echo '    -r <file.run>     File to be executed when clicking the button '
+    echo '    -text <text>       	Line text'
+    echo '    -icon <icon.svg>   	icon file'
+    echo '    -title <Title>     	Title'
+    echo '    -buttonType <type>	variable: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    -buttonText <text> 	Button text'
+    echo '    -r <file.run>     	File to be executed when clicking the button '
+    echo '    -id <id>     			id'
+    echo '    -class <class>     	class'
     echo ''
     exit $1
 }
