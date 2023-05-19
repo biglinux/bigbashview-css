@@ -4,9 +4,14 @@ usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -text <text>              text to the switch'
     echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
-    echo '    -run <file.run>           File to be executed when clicking the button'
+    echo '    -run <file.run>           File to be executed when clicking the switch'
+    echo '    -icon <icon.svg>          Icon file'
+    echo '    -iconPx <number>          Icon size in PX'
+    echo '    -bgColor <value>          Available: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    -check <checked>          Available: unchecked, checked, disabled, checked disabled'
     echo '    -fontSize <number>        1~6'
     echo '    -id <id>     			        id'
+    echo '    -fontSize <number>     	  1~6'
     echo '    -border <number>     		  1~5'
     echo '    -margin                   0~5, auto'
     echo '    -marginTop                0~5, auto'
@@ -15,6 +20,13 @@ usage() {
     echo '    -marginRight              0~5, auto'
     echo '    -marginHorizontal         0~5, auto'
     echo '    -marginVertical           0~5, auto'
+    echo '    -padding                  0~5, auto'
+    echo '    -paddingTop               0~5, auto'
+    echo '    -paddingBotton            0~5, auto'
+    echo '    -paddingLeft              0~5, auto'
+    echo '    -paddingRight             0~5, auto'
+    echo '    -paddingHorizontal        0~5, auto'
+    echo '    -paddingVertical          0~5, auto'
     echo ''
     exit $1
 }
@@ -25,6 +37,18 @@ while (( "$#" )); do
         -text)
             shift
             text="$1"
+            ;;
+        -icon)
+            shift
+            icon="$1"
+            ;;
+        -iconPx)
+            shift
+            iconPx="${1}px"
+            ;;
+        -bgColor)
+            shift
+            bgColor="bg-${1}"
             ;;
         -check)
             shift
@@ -74,6 +98,34 @@ while (( "$#" )); do
             shift
             marginVertical="my-${1}"
             ;;
+        -padding)
+            shift
+            padding="py-${1} px-${1}"
+            ;;
+        -paddingTop)
+            shift
+            paddingTop="pt-${1}"
+            ;;
+        -paddingBotton)
+            shift
+            paddingBotton="pb-${1}"
+            ;;
+        -paddingHorizontal)
+            shift
+            paddingHorizontal="px-${1}"
+            ;;
+        -paddingLeft)
+            shift
+            paddingLeft="ps-${1}"
+            ;;
+        -paddingRight)
+            shift
+            paddingRight="pe-${1}"
+            ;;
+        -paddingVertical)
+            shift
+            paddingVertical="py-${1}"
+            ;;
         *)
             usage 1
             ;;
@@ -82,9 +134,14 @@ while (( "$#" )); do
 done
 
 cat << EOF
-<div class="row align-items-center rounded ${border} ${margin} ${marginTop} ${marginBotton} ${marginVertical} ${marginLeft} ${marginRight} ${marginHorizontal}">
+<div class="row align-items-center rounded ${border} ${bgColor} ${margin} ${marginTop} ${marginBotton} ${marginVertical} ${marginLeft} ${marginRight} ${marginHorizontal} ${padding} ${paddingTop} ${paddingBotton} ${paddingVertical} ${paddingLeft} ${paddingRight} ${paddingHorizontal}">
   <div class="col-sm d-flex justify-content-end">
 EOF
+if [ -e "${icon}" ];then
+cat << EOF
+    <img src="./${icon}" width="${iconPx}" height="${iconPx}" class="mx-1"/>
+EOF
+fi
 if [ -n "${text}" ];then
 cat << EOF
     <div class="col-sm">
@@ -94,7 +151,7 @@ EOF
 fi
 cat << EOF
     <form class="form-check form-switch">
-      <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}"/>
+      <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}" ${check}/>
     </form>
   </div>
 </div>
