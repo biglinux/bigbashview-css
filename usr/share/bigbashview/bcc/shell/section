@@ -3,7 +3,7 @@
 # Function to start the HTML document
 start() {
     cat << EOF
-<section class="box mt-4">
+<section class="box mt-4 mb-4">
 EOF
 }
 
