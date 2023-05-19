@@ -5,10 +5,15 @@ cat << EOF
   <div class="row ${rowColumn}">
 EOF
 }
-body() {
+colStart() {
+cat << EOF
     <div class="col">
-        
+EOF
+}
+colEnd() {
+cat << EOF
     </div>
+EOF
 }
 end() {
 cat << EOF
@@ -20,9 +25,10 @@ EOF
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -start                '
-    echo '    -body                 '
-    echo '    -end                  '
+    echo '    start                     Sstart grid'
+    echo '    colStart                   Start column'
+    echo '    colEnd                    End column'
+    echo '    end                       Start grid'
     echo '    -rowColumn <number>       number of columns per row'
     echo ''
     exit $1
@@ -41,8 +47,11 @@ while (( "$#" )); do
         end)
             end_called=true
             ;;
-        body)
-	        body_called=true
+        colStart)
+	        colStart=true
+            ;;
+        colEnd)
+	        colEnd=true
             ;;
         *)
             usage 1
@@ -59,7 +68,9 @@ elif [ "$end_called" = "true" ]; then
     end
 fi
 
-# Chaeck if body function should be called
-if [ "$body_called" = "true" ]; then
-    body
+# Check if column function should be called
+if [ "$colStart" = "true" ]; then
+    colStart
+elif [ "$colEnd" = "true" ]; then
+    colEnd
 fi
