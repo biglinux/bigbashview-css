@@ -1,0 +1,65 @@
+#!/bin/bash
+start() {
+cat << EOF
+<div class="container text-center">
+  <div class="row ${rowColumn}">
+EOF
+}
+body() {
+    <div class="col">
+        
+    </div>
+}
+end() {
+cat << EOF
+  </div>
+</div>
+EOF
+}
+
+# Function to display usage message
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    -start                '
+    echo '    -body                 '
+    echo '    -end                  '
+    echo '    -rowColumn <number>       number of columns per row'
+    echo ''
+    exit $1
+}
+
+# Loop to process command-line arguments
+while (( "$#" )); do
+    case "$1" in
+        -rowColumn)
+            shift
+            rowColumn="row-cols-${1}"
+            ;;
+        -s|start)
+            start_called=true
+            ;;
+        end)
+            end_called=true
+            ;;
+        body)
+	        body_called=true
+            ;;
+        *)
+            usage 1
+            ;;
+    esac
+    shift
+done
+
+# Check if start function should be called
+if [ "$start_called" = "true" ]; then
+    start
+# Check if end function should be called
+elif [ "$end_called" = "true" ]; then
+    end
+fi
+
+# Chaeck if body function should be called
+if [ "$body_called" = "true" ]; then
+    body
+fi

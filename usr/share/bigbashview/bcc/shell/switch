@@ -2,11 +2,19 @@
 
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -topText <text>          text to the left of the switch'
-    echo '    -rightText <text>         text to the right of the switch'
+    echo '    -text <text>              text to the switch'
     echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
     echo '    -run <file.run>           File to be executed when clicking the button'
     echo '    -fontSize <number>        1~6'
+    echo '    -id <id>     			        id'
+    echo '    -border <number>     		  1~5'
+    echo '    -margin                   0~5, auto'
+    echo '    -marginTop                0~5, auto'
+    echo '    -marginBotton             0~5, auto'
+    echo '    -marginLeft               0~5, auto'
+    echo '    -marginRight              0~5, auto'
+    echo '    -marginHorizontal         0~5, auto'
+    echo '    -marginVertical           0~5, auto'
     echo ''
     exit $1
 }
@@ -14,15 +22,9 @@ usage() {
 # Loop to process command-line arguments
 while (( "$#" )); do
     case "$1" in
-        -topText)
+        -text)
             shift
-            topText="$1"
-            topTextOn="true"
-            ;;
-        -rightText)
-            shift
-            rightText="$1"
-            rightTextOn="true"
+            text="$1"
             ;;
         -check)
             shift
@@ -32,9 +34,45 @@ while (( "$#" )); do
             shift
             run="$1"
             ;;
+        -id)
+            shift
+            id="$1"
+            ;;
         -fontSize)
             shift
-            fontSize="$1"
+            fontSize="h${1}"
+            ;;
+        -border)
+            shift
+            border="border border-${1}"
+            ;;
+        -margin)
+            shift
+            margin="my-${1} mx-${1}"
+            ;;
+        -marginTop)
+            shift
+            marginTop="mt-${1}"
+            ;;
+        -marginBotton)
+            shift
+            marginBotton="mb-${1}"
+            ;;
+        -marginHorizontal)
+            shift
+            marginHorizontal="mx-${1}"
+            ;;
+        -marginLeft)
+            shift
+            marginLeft="ms-${1}"
+            ;;
+        -marginRight)
+            shift
+            marginRight="me-${1}"
+            ;;
+        -marginVertical)
+            shift
+            marginVertical="my-${1}"
             ;;
         *)
             usage 1
@@ -43,23 +81,39 @@ while (( "$#" )); do
     shift
 done
 
-if [ "$topTextOn" = "true" ];then
 cat << EOF
-    <span class="text-start ${fontSize}">${topText}</span>
+<div class="row align-items-center rounded ${border} ${margin} ${marginTop} ${marginBotton} ${marginVertical} ${marginLeft} ${marginRight} ${marginHorizontal}">
+  <div class="col-sm d-flex justify-content-end">
 EOF
-fi
-
+if [ -n "${text}" ];then
 cat << EOF
-<div class="form-check form-switch">
-  <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" $checked>
-EOF
-
-if [ "$rightTextOn" = "true" ];then
-cat << EOF
-    <span class="text-start ${fontSize}">${rightText}</span>
+    <div class="col-sm">
+      <label class="form-check-label" for="${id}">${text}</label>
+    </div>
 EOF
 fi
 cat << EOF
-</div>
+    <form class="form-check form-switch">
+      <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}"/>
+    </form>
+  </div>
 </div>
 EOF
+
+
+
+
+# cat << EOF
+# <div class="form-check form-switch">
+#   <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}" $checked>
+# EOF
+# 
+# if [ -n "$text" ];then
+# cat << EOF
+#     <label class="form-check-label ${fontSize}" for="${id}">${rightText}</label>
+# <!--     <span class="text-start ${fontSize}">${rightText}</span> -->
+# EOF
+# fi
+# cat << EOF
+# </div>
+# EOF

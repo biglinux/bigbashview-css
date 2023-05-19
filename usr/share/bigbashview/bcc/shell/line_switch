@@ -7,6 +7,7 @@ usage() {
     echo '    -icon <icon.svg>          Icon file'
     echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
     echo '    -run <file.run>           File to be executed when clicking the button'
+    echo '    -border <number>     	    1~5'
     echo ''
     exit $1
 }
@@ -30,6 +31,14 @@ while (( "$#" )); do
             shift
             run="$1"
             ;;
+        -border)
+            shift
+            border="border border-${1}"
+            ;;
+        -id)
+            shift
+            id="$1"
+            ;;
         *)
             usage 1
             ;;
@@ -38,7 +47,7 @@ while (( "$#" )); do
 done
 
 cat << EOF
-<div class="row align-items-center bg-secondary text-white rounded py-3  mx-5 border">
+<div class="row align-items-center bg-secondary text-white rounded py-3 mx-5 ${border}">
     <div class="col .col-sm-8 d-flex align-items-center">
 EOF
 if [ -e "${icon}" ];then
@@ -47,7 +56,7 @@ cat << EOF
 EOF
 fi
 cat << EOF
-        <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${lineText}</label>
+        <label class="form-check-label text-body ms-2" for="${ID}">${lineText}</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
         <form class="form-check form-switch">

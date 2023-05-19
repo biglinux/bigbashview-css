@@ -31,9 +31,11 @@ body() {
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -start                '
+    echo '    -body                 '
     echo '    -end                  '
     echo '    -title <title>        '
     echo '    -icon <icon.svg>      '
+    echo '    -id <id>     			id'
     echo ''
     exit $1
 }
