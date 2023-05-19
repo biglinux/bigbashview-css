@@ -62,7 +62,7 @@ cat << EOF
 <div class="row align-items-center bg-secondary text-white rounded py-3  mx-5 ${border} ${class}">
     <div class="col .col-sm-8 d-flex align-items-center">
         <img src="./${icon}" width="20px" height="20px" class="mx-1"/>
-        <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${lineText}</label>
+        <label class="form-check-label text-body cursor-pointer ms-1" for="flexSwitchCheckDefault">${lineText}</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
         <!-- Button trigger modal -->
