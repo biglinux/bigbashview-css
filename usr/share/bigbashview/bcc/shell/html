@@ -22,16 +22,25 @@ EOF
 
 header(){
 cat << EOF
-<header class="col-sm d-flex align-items-center justify-content-end">
-    <div class="col-sm d-flex align-items-center justify-content-end">
-        <img src="xpto.svg"/>
-        <label>xpto</label>
-    </div>
-    <div class="col-sm d-flex align-items-center justify-content-end">
-        <img src="xpto.svg"/>
-        <label>xpto</label>
-    </div>
+<!--<header class="col-sm d-flex align-items-center justify-content-center py-3">
+    <nav class="nav nav-pills nav-justified">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><img src="icons/temas.svg" width="35px" height="35px" class="mx-1 me-2"/>Temas</button>
+        
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><img src="icons/desktops.svg" width="35px" height="35px" class="mx-1 me-2"/>Desktops</button>
+
+      </div>
+    </nav>
 </header>
+<div class="tab-content bg-secondary" id="nav-tabContent" >
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      <label class="form-check-label" for="${id}">XPTO</label>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+      <label class="form-check-label" for="${id}">otpx</label>
+  </div>
+</div>-->
 EOF
 }
 
@@ -71,6 +80,9 @@ while (( "$#" )); do
         end)
             end_called=true
             ;;
+        header)
+            header=true
+            ;;
         *)
             usage 1
             ;;
@@ -84,4 +96,7 @@ if [ "$start_called" = "true" ]; then
 # Check if end function should be called
 elif [ "$end_called" = "true" ]; then
     end
+# Check if header function should be called
+elif [ "$header" = "true" ]; then
+    header
 fi
