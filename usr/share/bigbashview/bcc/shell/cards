@@ -1,0 +1,24 @@
+#!/bin/bash
+
+cat << EOF
+<form class="bg-secondary d-flex align-items-center justify-content-center">
+EOF
+
+#se tiver icone
+if [ -e "${icon}" ];then
+cat << EOF
+    <img src="./${icon}" width="${iconPx}" height="${iconPx}" class="mx-1 me-2"/>
+EOF
+fi
+
+#se tiver texto
+if [ -n "${text}" ];then
+cat << EOF
+    <label class="form-check-label" for="${id}">${text}</label>
+EOF
+fi
+
+cat << EOF
+<input onclick="_run('./$run')"
+</form>
+EOF
