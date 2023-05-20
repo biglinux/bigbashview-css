@@ -157,7 +157,7 @@ fi
 #se tiver texto
 if [ -n "${text}" ];then
 cat << EOF
-      <label class="form-check-label" for="${id}">${text}</label>
+    <label class="form-check-label" for="${id}">${text}</label>
 EOF
 fi
 

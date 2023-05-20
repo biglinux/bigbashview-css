@@ -20,6 +20,22 @@ start() {
 EOF
 }
 
+header(){
+cat << EOF
+<header class="col-sm d-flex align-items-center justify-content-end">
+    <div class="col-sm d-flex align-items-center justify-content-end">
+        <img src="xpto.svg"/>
+        <label>xpto</label>
+    </div>
+    <div class="col-sm d-flex align-items-center justify-content-end">
+        <img src="xpto.svg"/>
+        <label>xpto</label>
+    </div>
+</header>
+EOF
+}
+
+
 # Function to end the HTML document
 end() {
     cat << EOF
