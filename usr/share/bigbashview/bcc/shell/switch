@@ -5,15 +5,13 @@ usage() {
     echo '    -text <text>              text to the switch'
     echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
     echo '    -run <file.run>           File to be executed when clicking the switch'
-    echo '    -run2 <file.run>          File to be executed when clicking the switch'
     echo '    -icon <icon.svg>          Icon file'
     echo '    -iconPx <number>          Icon size in PX'
     echo '    -bgColor <value>          Available: primary, secondary, success, danger, warning, info, light, dark, link'
     echo '    -check <checked>          Available: unchecked, checked, disabled, checked disabled'
-    echo '    -check2 <checked>         Available: unchecked, checked, disabled, checked disabled'
     echo '    -fontSize <number>        1~6'
     echo '    -id <id>     			    id'
-    echo '    -fontSize <number>        1~6'
+    echo '    -fontSize <number>     	1~6'
     echo '    -border <number>     		1~5'
     echo '    -margin                   0~5, auto'
     echo '    -marginTop                0~5, auto'
@@ -146,7 +144,7 @@ done
 #abertura
 cat << EOF
 <div class="row align-items-center rounded ${border} ${bgColor} ${margin} ${marginTop} ${marginBotton} ${marginVertical} ${marginLeft} ${marginRight} ${marginHorizontal} ${padding} ${paddingTop} ${paddingBotton} ${paddingVertical} ${paddingLeft} ${paddingRight} ${paddingHorizontal}">
-  <div class="col-sm d-flex justify-content-end align-items-center">
+  <div class="col-sm d-flex align-items-center">
 EOF
 
 #se tiver icone
@@ -159,24 +157,32 @@ fi
 #se tiver texto
 if [ -n "${text}" ];then
 cat << EOF
-    <div class="col-sm">
       <label class="form-check-label" for="${id}">${text}</label>
-    </div>
 EOF
 fi
 
+#fechamento 
+cat << EOF
+</div>
+EOF
+
+
 #botão switch
 cat << EOF
-    <form class="form-check form-switch">
-      <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}" ${check}/>
-    </form>
+    <div class="col-sm d-flex align-items-center justify-content-end">
+        <form class="form-check form-switch">
+            <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}" ${check}/>
+        </form>
+    </div>
 EOF
 
 if [ -n "$check2" ];then
 cat << EOF
-    <form class="form-check form-switch ms-2">
-      <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" id="${id}2" ${check2}/>
-    </form>
+    <div class="col-sm d-flex align-items-center justify-content-end">
+        <form class="form-check form-switch ms-2">
+            <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" id="${id}2" ${check2}/>
+        </form>
+    </div>
 EOF
 fi
 
