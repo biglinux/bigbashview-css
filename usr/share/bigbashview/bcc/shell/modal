@@ -14,7 +14,7 @@ EOF
 }
 end() {
 cat << EOF
-</div>
+      </div>
 <!--       <div class="modal-footer"> -->
 <!--         <button type="button" class="btn btn-${buttonType}" data-bs-dismiss="modal">Close</button> -->
 <!--       </div> -->
@@ -26,13 +26,26 @@ EOF
 body() {
 	bash ${run}
 }
+footerStart() {
+cat << EOF
+    <p></p>
+	<div class="modal-footer">
+EOF
+}
+footerEnd() {
+cat << EOF
+	</div>
+EOF
+}
 
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -start                '
-    echo '    -body                 '
-    echo '    -end                  '
+    echo '    body                 '
+    echo '    footerStart          '
+    echo '    footerEnd            '
+    echo '    end                  '
     echo '    -title <title>        '
     echo '    -icon <icon.svg>      '
     echo '    -id <id>     			id'
@@ -72,6 +85,12 @@ while (( "$#" )); do
         body)
 	        body_called=true
             ;;
+        footerStart)
+	        footerStart_called=true
+            ;;
+        footerEnd)
+	        footerEnd_called=true
+            ;;
         *)
             usage 1
             ;;
@@ -90,4 +109,8 @@ fi
 # Chaeck if body function should be called
 if [ "$body_called" = "true" ]; then
     body
+elif [ "$footerStart_called" = "true" ]; then
+    footerStart
+elif [ "$footerEnd_called" = "true" ]; then
+    footerEnd
 fi
