@@ -2,7 +2,7 @@
 
 pkgname=bigbashview-css
 pkgdesc="BigBashView CSS for bootstrap"
-# depends=('')
+depends=('bootstrap')
 # makedepends=('')
 # conflicts=('')
 pkgver=$(date +%y.%m.%d)
