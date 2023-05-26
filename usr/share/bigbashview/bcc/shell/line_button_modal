@@ -8,12 +8,11 @@ usage() {
     echo '    -title <Title>     	Title'
     echo '    -buttonType <type>	variable: primary, secondary, success, danger, warning, info, light, dark, link'
     echo '    -buttonText <text> 	Button text'
-    echo '    -r <file.run>     	File to be executed when clicking the button '
     echo '    -id <id>     			id'
     echo '    -class <class>     	class'
     echo '    -border <number>     	1~5'
     echo ''
-    exit $1
+    exit "$1"
 }
 
 # Loop to process command-line arguments

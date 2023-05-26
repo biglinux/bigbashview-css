@@ -14,50 +14,27 @@ end() {
 EOF
 }
 
-text1() {
+text() {
+if [ -n "$fontSize" ];then
+    size=$fontSize
+else
+    size=h1
+fi
 cat << EOF
-<h1 class="mb-2 mt-3 mx-5">${text}</h1>
+<${size} class="mb-2 mt-3 mx-5">${text}</${size}>
 EOF
 }
-text2() {
-cat << EOF
-<h2 class="mb-2 mt-3 mx-5">${text}</h2>
-EOF
-}
-text3() {
-cat << EOF
-<h3 class="mb-2 mt-3 mx-5">${text}</h3>
-EOF
-}
-text4() {
-cat << EOF
-<h4 class="mb-2 mt-3 mx-5">${text}</h4>
-EOF
-}
-text5() {
-cat << EOF
-<h5 class="mb-2 mt-3 mx-5">${text}</h5>
-EOF
-}
-text6() {
-cat << EOF
-<h6 class="mb-2 mt-3 mx-5">${text}</h6>
-EOF
-}
+
 
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    start             '
-    echo '    end               '
-    echo '    -textH1 <text>        '
-    echo '    -textH2 <text>        '
-    echo '    -textH3 <text>        '
-    echo '    -textH4 <text>        '
-    echo '    -textH5 <text>        '
-    echo '    -textH6 <text>        '
+    echo '    start                 section start'
+    echo '    end                   section end'
+    echo '    -text <text>          text to the section'
+    echo '    -fontSize <number>    value: 1~6'
     echo ''
-    exit $1
+    exit "$1"
 }
 
 # Loop to process command-line arguments
@@ -69,35 +46,14 @@ while (( "$#" )); do
         end)
             end_called=true
             ;;
-        -textH1)
+        -text)
             shift
             text="$1"
-            text1=true
+            text_called=true
             ;;
-        -textH2)
+        -fontSize)
             shift
-            text="$1"
-            text2=true
-            ;;
-        -textH3)
-            shift
-            text="$1"
-            text3=true
-            ;;
-        -textH4)
-            shift
-            text="$1"
-            text4=true
-            ;;
-        -textH5)
-            shift
-            text="$1"
-            text5=true
-            ;;
-        -textH6)
-            shift
-            text="$1"
-            text6=true
+            fontSize="H$1"
             ;;
         *)
             usage 1
@@ -113,21 +69,8 @@ if [ "$start_called" = "true" ]; then
 elif [ "$end_called" = "true" ]; then
     end
 fi
-if [ "$text1" = "true" ]; then
-    text1
+if [ "$text_called" = "true" ]; then
+    text
 fi
-if [ "$text2" = "true" ]; then
-    text2
-fi
-if [ "$text3" = "true" ]; then
-    text3
-fi
-if [ "$text4" = "true" ]; then
-    text4
-fi
-if [ "$text5" = "true" ]; then
-    text5
-fi
-if [ "$text6" = "true" ]; then
-    text6
-fi
+
+

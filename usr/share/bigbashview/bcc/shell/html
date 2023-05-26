@@ -59,12 +59,12 @@ EOF
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -start                '
-    echo '    -end                  '
-    echo '    -title <title>        '
-    echo '    -icon <icon.svg>      '
+    echo '    start                start the html, import the css and js'
+    echo '    end                  finalize the html'
+    echo '    -title <title>       page title'
+    echo '    -icon <icon.svg>     page icon'
     echo ''
-    exit $1
+    exit "$1"
 }
 
 # Loop to process command-line arguments

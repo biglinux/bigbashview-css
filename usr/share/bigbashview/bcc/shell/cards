@@ -2,9 +2,9 @@
 
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -border <number>     		1~5'
-    echo '    -shadow <number>     		1~5'
-    echo '    -run <file.run>           File to be executed when clicking the switch, dont use with -ids'
+    echo '    -border <number>     		value: 1~5'
+    echo '    -shadow <number>     		value: 1~5'
+    echo '    -run <file.run>           File to be executed when clicking the switch, dont use with -id'
     echo '    -id <id>     			    id use on for modal, dont use with -run'
     echo '    -image <image.svg>     	image file'
     echo '    -imageWidth <value>       value in px'
@@ -19,7 +19,7 @@ usage() {
     echo '    -iconCheckSize <number>   value in px'
     echo '    -iconCheckPosY <type>     Available: top, bottom'
     echo '    -iconCheckPosX <type>     Available: start, end'
-    echo '    -iconLabel <icon.svg>     Icon for check'
+    echo '    -iconLabel <image.svg>    Image for label'
     echo '    -iconLabelkSize <number>  value in px'
     echo '    -iconLabelPosY <type>     Available: top, bottom'
     echo '    -iconLabelPosX <type>     Available: start, end'
@@ -134,16 +134,16 @@ fi
 
 #Imagen
 if [ -n "${image}" ];then
-    if [ -z ${imageMarginX} ];then
+    if [ -z "${imageMarginX}" ];then
         imageMarginX=2
     fi
-    if [ -z ${imageMarginY} ];then
+    if [ -z "${imageMarginY}" ];then
         imageMarginY=2
     fi
-    if [ -z ${imagePaddingX} ];then
+    if [ -z "${imagePaddingX}" ];then
         imagePaddingX=2
     fi
-    if [ -z ${imagePaddingY} ];then
+    if [ -z "${imagePaddingY}" ];then
         imagePaddingY=2
     fi
 cat << EOF

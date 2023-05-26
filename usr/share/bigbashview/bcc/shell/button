@@ -7,7 +7,7 @@ usage() {
     echo '    -buttonText <text>        Button text'
     echo '    -run <file.run>           File to be executed when clicking the button'
     echo ''
-    exit $1
+    exit "$1"
 }
 
 # Loop to process command-line arguments

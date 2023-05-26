@@ -23,8 +23,8 @@ cat << EOF
 </div>
 EOF
 }
-body() {
-	bash ${run}
+run() {
+	bash "${run}"
 }
 footerStart() {
 cat << EOF
@@ -41,16 +41,18 @@ EOF
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -start                '
-    echo '    body                 '
-    echo '    footerStart          '
-    echo '    footerEnd            '
-    echo '    end                  '
-    echo '    -title <title>        '
-    echo '    -icon <icon.svg>      '
-    echo '    -id <id>     			id'
+    echo '    start                     start modal'
+    echo '    body <file>               modal body'
+    echo '    footerStart               start footer'
+    echo '    footerEnd                 end footer'
+    echo '    end                       end modal'
+    echo '    -title <title>            Title'
+    echo '    -icon <icon.svg>          Icon file'
+    echo '    -id <id>     		        id'
+    echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    -run <file.run>           File to be executed when clicking the button'
     echo ''
-    exit $1
+    exit "$1"
 }
 
 # Loop to process command-line arguments
@@ -82,9 +84,6 @@ while (( "$#" )); do
         end)
             end_called=true
             ;;
-        body)
-	        body_called=true
-            ;;
         footerStart)
 	        footerStart_called=true
             ;;
@@ -107,10 +106,12 @@ elif [ "$end_called" = "true" ]; then
 fi
 
 # Chaeck if body function should be called
-if [ "$body_called" = "true" ]; then
-    body
-elif [ "$footerStart_called" = "true" ]; then
+if [ "$footerStart_called" = "true" ]; then
     footerStart
 elif [ "$footerEnd_called" = "true" ]; then
     footerEnd
+fi
+
+if [ -n "$run" ];then
+    run
 fi
