@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Function to display usage message
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    -buttonText <text>        Button text'
+    echo '    -run <file.run>           File to be executed when clicking the button'
+    echo ''
+    exit $1
+}
+
+# Loop to process command-line arguments
+while (( "$#" )); do
+    case "$1" in
+        -buttonType)
+            shift
+            buttonType="$1"
+            ;;
+        -buttonText)
+            shift
+            buttonText="$1"
+            ;;
+        -run)
+            shift
+            run="$1"
+            ;;
+        *)
+            usage 1
+            ;;
+    esac
+    shift
+done
+
+
+
+cat << EOF
+<div class="d-flex justify-content-center">
+    <form class="form-check form-switch">
+    <button onclick="_run('${run}')" type="button" class="btn btn-${buttonType}">${buttonText}</button>
+    </form>
+</div>
+EOF
+ 

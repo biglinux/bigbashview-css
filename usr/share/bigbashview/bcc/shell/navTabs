@@ -1,0 +1,288 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo 'It is necessary to create a file with the same name as the ID ending in .nav with the content of each navTab'
+    echo '    -title <Title>     	    titles, use for translated text titles'
+    echo '    -id <id>     			    id, use for untranslated id'
+    echo ''
+    exit "$1"
+}
+
+# Array para armazenar os valores das variáveis
+declare -a title
+declare -a id
+declare -a activeTab
+
+
+# Processar os argumentos
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -activeTab)
+            activeTab+=("$2")
+            shift 2
+            ;;
+        -title)
+            title+=("$2")
+            shift 2
+            ;;
+        -id)
+            id+=("$2")
+            shift 2
+            ;;
+        *)
+            usage 1
+            ;;
+    esac
+done
+
+# Cabeçalho da Tab
+cat << EOF
+<nav>
+	<div class="nav nav-tabs align-items-center justify-content-center py-3 nav-pills" id="nav-tab" role="tablist">
+		<div class="row align-items-center w-100">
+EOF
+
+#executar 1 vez por variavel
+for ((i=0; i<${#id[@]}; i++)); do
+
+#se for a primeiro loop colocar active
+# -a ${activeTab} = "${id[i]}"
+# if [ "$((i+1))" -le "1" ]; then
+#   active=active
+if [ -n "${activeTab}" ];then
+  if [ "${activeTab}" = "${id[i]}" ];then
+    active=active
+  else
+    active=
+  fi
+else
+  if [ "$((i+1))" -le "1" ]; then
+    active=active
+  else
+    active=
+  fi
+fi
+# Tabs
+cat << EOF
+			<div class="col d-flex justify-content-center">
+				<button class="nav-link $active btn btn-transparent" id="nav-${id[i]}-tab" data-bs-toggle="tab" data-bs-target="#nav-${id[i]}" type="button" role="tab" aria-controls="nav-${id[i]}" aria-selected="true">${title[i]}</button>
+			</div>
+EOF
+done
+# Fechamento Tab
+cat << EOF
+		</div>
+	</div>
+</nav>
+EOF
+
+# Cabeçalho Contents
+cat << EOF
+<div class="tab-content" id="nav-tabContent">
+EOF
+
+#executar 1 vez por variavel
+for ((i=0; i<${#id[@]}; i++)); do
+
+#   if [ "$checked_refresh" = "checked" ]; then
+#     active="show active"
+#   else
+#     active=
+#   fi
+# if [ "$((i+1))" -le "1" ]; then
+#   active="show active"
+
+if [ -n "${activeTab}" ];then
+  if [ "${activeTab}" = "${id[i]}" ];then
+    active="show active"
+  else
+    active=
+  fi
+else
+  if [ "$((i+1))" -le "1" ]; then
+    active="show active"
+  else
+    active=
+  fi
+fi
+cat << EOF
+  <div class="tab-pane fade $active bg-secondary rounded mx-3 my-3 py-4" id="nav-${id[i]}" role="tabpanel" aria-labelledby="nav-${id[i]}-tab" tabindex="0">
+EOF
+	  # executar . nav com o nome da Tab
+    bash "${id[i]}".nav
+
+# Fechamento
+cat << EOF
+  </div>
+EOF
+done
+
+# Fechamento Contents
+cat << EOF
+</div>
+EOF
+
+
+### Mais novo funcionando até AKI ####
+
+
+# start() {
+# cat << EOF
+# <nav>
+#   <div class="nav nav-tabs align-items-center justify-content-center py-3 nav-pills" id="nav-tab" role="tablist">
+#     <div class="row align-items-center w-100">
+# EOF
+# }
+# 
+# end() {
+# cat << EOF
+#     </div>
+#   </div>
+# </nav>
+# EOF
+# }
+# 
+# 
+# while (( "$#" )); do
+#     case "$1" in
+#         -s|start)
+#             start
+#             ;;
+#         end)
+#             end
+#             ;;
+#         -title)
+# 	        for i in $i[@];do
+# 	        number=$((number + 1))
+#             shift
+#             title="$1"
+# if [ "${number}" -le "1" ]; then
+# active=active
+# else
+# active=
+# fi
+# cat << EOF
+#       <div class="col d-flex justify-content-center">
+#         <button class="nav-link $active btn btn-transparent" id="nav-${title}-tab" data-bs-toggle="tab" data-bs-target="#nav-${title}" type="button" role="tab" aria-controls="nav-${title}" aria-selected="true">${title}</button>
+#       </div>
+# EOF
+#             done
+#             ;;
+#     esac
+#     shift
+# done
+# 
+# 
+# 
+# #cabeçalho
+# <nav>
+#   <div class="nav nav-tabs align-items-center justify-content-center py-3 nav-pills" id="nav-tab" role="tablist">
+#     <div class="row align-items-center w-100">
+#       
+#       #title X vezes
+#       <div class="col d-flex justify-content-center">
+#         <button class="nav-link $active btn btn-transparent" id="nav-${title}-tab" data-bs-toggle="tab" data-bs-target="#nav-${title}" type="button" role="tab" aria-controls="nav-${title}" aria-selected="true">${title}</button>
+#       </div>
+#       
+#       <div class="col d-flex justify-content-center">
+#         <button class="nav-link $active btn btn-transparent" id="nav-${title}-tab" data-bs-toggle="tab" data-bs-target="#nav-${title}" type="button" role="tab" aria-controls="nav-${title}" aria-selected="true">${title}</button>
+#       </div>
+#       
+#     #end cabeçalho
+#     </div>
+#   </div>
+# </nav>
+# 
+# #start content
+# <div class="tab-content" id="nav-tabContent">
+#   <div class="tab-pane fade show active bg-secondary rounded mx-3 my-3 py-4" id="nav-${title}" role="tabpanel" aria-labelledby="nav-${title}-tab" tabindex="0">
+#   
+#     ##BODY##
+#   
+#   #end conten
+#   </div>
+# </div>
+# 
+# start cabeçalho
+#   title X vezes
+# end cabeçalho
+# 
+# start body
+#   body x vezes
+# end body
+
+
+# cat << EOF
+#   <div class="tab-content" id="nav-tabContent">
+#   <div class="tab-pane fade show active bg-secondary rounded mx-3 my-3 py-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+# EOF
+# 
+#   grid start -rowColumn 2
+#   grid colStart
+#   cards -border 0 -shadow 0 -image desktop-classic.svg -iconCheck icons/checked.svg -iconCheckSize 22 -iconCheckPosY top -iconCheckPosX end -run xpto.run
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid colStart
+#   cards
+#   grid colEnd
+#   grid end
+# 
+# cat << EOF
+#   </div>
+#   <div class="tab-pane fade bg-secondary" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+# EOF
+# 
+# cat << EOF
+#   </div>
+# </div>
+# EOF
+
+
+# cat << EOF
+# <nav>
+#   <div class="nav nav-tabs align-items-center justify-content-center py-3 nav-pills" id="nav-tab" role="tablist">
+# 
+#     <div class="row align-items-center w-100">
+#       <div class="col d-flex justify-content-center">
+#       
+#         <button class="nav-link active btn btn-transparent" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">HomeX</button>
+#       </div>
+#     
+#       <div class="col d-flex justify-content-center">
+#         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">ProfileY</button>
+#       </div>
+#       
+#   </div>
+# </div>
+# </nav>
+# <div class="tab-content" id="nav-tabContent">
+#   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+# EOF
+# #   echo otpx
+# cat << EOF
+#   </div>
+#   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+# EOF
+#   bash Desktop.nav
+# cat << EOF
+#   </div>
+# </div>
+# EOF

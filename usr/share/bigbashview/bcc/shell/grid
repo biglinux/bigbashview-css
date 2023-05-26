@@ -25,8 +25,8 @@ EOF
 # Function to display usage message
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    start                     Sstart grid'
-    echo '    colStart                   Start column'
+    echo '    start                     Start grid'
+    echo '    colStart                  Start column'
     echo '    colEnd                    End column'
     echo '    end                       Start grid'
     echo '    -rowColumn <number>       number of columns per row'

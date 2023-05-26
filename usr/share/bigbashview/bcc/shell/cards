@@ -1,24 +1,191 @@
 #!/bin/bash
 
-cat << EOF
-<form class="bg-secondary d-flex align-items-center justify-content-center">
-EOF
+usage() {
+    echo "Usage: ${0##*/} [options]"
+    echo '    -border <number>     		1~5'
+    echo '    -shadow <number>     		1~5'
+    echo '    -run <file.run>           File to be executed when clicking the switch, dont use with -ids'
+    echo '    -id <id>     			    id use on for modal, dont use with -run'
+    echo '    -image <image.svg>     	image file'
+    echo '    -imageWidth <value>       value in px'
+    echo '    -imageHeight <value>      value in px'
+    echo '    -imageMarginX <number>    value: 1~5'
+    echo '    -imageMarginY <number>    value: 1~5'
+    echo '    -imagePaddingX <number>   value: 1~5'
+    echo '    -imagePaddingY <number>   value: 1~5'
+    echo '    -title <Title>     	    Title'
+    echo '    -text <text>              Text'
+    echo '    -iconCheck <icon.svg>     Icon for check'
+    echo '    -iconCheckSize <number>   value in px'
+    echo '    -iconCheckPosY <type>     Available: top, bottom'
+    echo '    -iconCheckPosX <type>     Available: start, end'
+    echo '    -iconLabel <icon.svg>     Icon for check'
+    echo '    -iconLabelkSize <number>  value in px'
+    echo '    -iconLabelPosY <type>     Available: top, bottom'
+    echo '    -iconLabelPosX <type>     Available: start, end'
+    echo ''
+    exit "$1"
+}
 
-#se tiver icone
-if [ -e "${icon}" ];then
+#Loop to process command-line arguments
+while (( "$#" )); do
+    case "$1" in
+        -border)
+            shift
+            border="border border-${1}"
+            ;;
+        -shadow)
+            shift
+            shadow="shadow ${1}"
+            ;;
+        -run)
+            shift
+            run="$1"
+            ;;
+        -id)
+            shift
+            id="$1"
+            ;;
+        -image)
+            shift
+            image="$1"
+            ;;
+        -imageMarginX)
+            shift
+            imageMarginX="$1"
+            ;;
+        -imageMarginY)
+            shift
+            imageMarginY="$1"
+            ;;
+        -imagePaddingX)
+            shift
+            imagePaddingX="$1"
+            ;;
+        -imagePaddingY)
+            shift
+            imagePaddingY="$1"
+            ;;
+        -imageWidth)
+            shift
+            imageWidth="$1"
+            ;;
+        -imageHeight)
+            shift
+            imageHeight="$1"
+            ;;
+        -title)
+            shift
+            title="$1"
+            ;;
+        -text)
+            shift
+            text="$1"
+            ;;
+        -iconCheck)
+            shift
+            iconCheck="$1"
+            ;;
+        -iconCheckSize)
+            shift
+            iconCheckSize="$1"
+            ;;
+        -iconCheckPosY)
+            shift
+            iconCheckPosY="$1"
+            ;;
+        -iconCheckPosX)
+            shift
+            iconCheckPosX="$1"
+            ;;
+        -iconLabel)
+            shift
+            iconLabel="$1"
+            ;;
+        -iconLabelkSize)
+            shift
+            iconLabelkSize="$1"
+            ;;
+        -iconLabelPosY)
+            shift
+            iconLabelPosY="$1"
+            ;;
+        -iconLabelPosX)
+            shift
+            iconLabelPosX="$1"
+            ;;
+        *)
+            usage 1
+            ;;
+    esac
+    shift
+done
+
+#Start Cards
+if [ -n "${run}" ];then
 cat << EOF
-    <img src="./${icon}" width="${iconPx}" height="${iconPx}" class="mx-1 me-2"/>
+<div class="card d-flex align-items-center justify-content-center rounded ${border} my-3 ${shadow}" role='button' onclick="_run('$run')">
+EOF
+elif [ -n "${id}" ];then
+cat << EOF
+<div class="card d-flex align-items-center justify-content-center rounded ${border} my-3 ${shadow}" role='button' data-bs-toggle="modal" data-bs-target="#${id}">
 EOF
 fi
 
-#se tiver texto
+#Imagen
+if [ -n "${image}" ];then
+    if [ -z ${imageMarginX} ];then
+        imageMarginX=2
+    fi
+    if [ -z ${imageMarginY} ];then
+        imageMarginY=2
+    fi
+    if [ -z ${imagePaddingX} ];then
+        imagePaddingX=2
+    fi
+    if [ -z ${imagePaddingY} ];then
+        imagePaddingY=2
+    fi
+cat << EOF
+<!--     <div class="card-body"> -->
+        <img src="${image}" width="${imageWidth}" height="${imageHeight}" class="img-fluid mx-${imageMarginX} my-${imageMarginY} px-${imagePaddingX} py-${imagePaddingY}"/>
+<!--     </div> -->
+EOF
+fi
+
+#Title
+if [ -n "${title}" ];then
+cat << EOF
+    <div class="card-body">
+        <h5 class="card-title">${title}</h5>
+    </div>
+EOF
+fi
+
+#Text
 if [ -n "${text}" ];then
 cat << EOF
-    <label class="form-check-label" for="${id}">${text}</label>
+    <div class="card-body">
+        <p class="card-text">${text}</p>
+    </div>
+EOF
+fi
+
+#Icon-check
+if [ -n "${iconCheck}" ];then
+cat << EOF
+    <img src="${iconCheck}" width="${iconCheckSize}" height="${iconCheckSize}" class="mx-2 my-2 position-absolute ${iconCheckPosY}-0 ${iconCheckPosX}-0"/>
+EOF
+fi
+
+#Icon-Label
+if [ -n "${iconLabel}" ];then
+cat << EOF
+    <img src="${iconLabel}" width="${iconLabelkSize}" height="${iconLabelkSize}" class="mx-2 my-2 position-absolute ${iconLabelPosY}-0 ${iconLabelPosX}-0"/>
 EOF
 fi
 
 cat << EOF
-<input onclick="_run('./$run')"
-</form>
+</div>
+
 EOF

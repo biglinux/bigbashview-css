@@ -28,7 +28,7 @@ usage() {
     echo '    -paddingHorizontal        0~5, auto'
     echo '    -paddingVertical          0~5, auto'
     echo ''
-    exit $1
+    exit "$1"
 }
 
 # Loop to process command-line arguments
