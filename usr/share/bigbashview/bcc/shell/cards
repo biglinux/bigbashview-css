@@ -2,18 +2,18 @@
 
 usage() {
     echo "Usage: ${0##*/} [options]"
-    echo '    -border <number>     		value: 1~5'
-    echo '    -shadow <number>     		value: 1~5'
+    echo '    -border <number>          value: 1~5'
+    echo '    -shadow <number>  value: 1~5'
     echo '    -run <file.run>           File to be executed when clicking the switch, dont use with -id'
-    echo '    -id <id>     			    id use on for modal, dont use with -run'
-    echo '    -image <image.svg>     	image file'
+    echo '    -id <id>                  id use on for modal, dont use with -run'
+    echo '    -image <image.svg>        image file'
     echo '    -imageWidth <value>       value in px'
     echo '    -imageHeight <value>      value in px'
     echo '    -imageMarginX <number>    value: 1~5'
     echo '    -imageMarginY <number>    value: 1~5'
     echo '    -imagePaddingX <number>   value: 1~5'
     echo '    -imagePaddingY <number>   value: 1~5'
-    echo '    -title <Title>     	    Title'
+    echo '    -title <Title>            Title'
     echo '    -text <text>              Text'
     echo '    -iconCheck <icon.svg>     Icon for check'
     echo '    -iconCheckSize <number>   value in px'
@@ -32,11 +32,11 @@ while (( "$#" )); do
     case "$1" in
         -border)
             shift
-            border="border border-${1}"
+            border="border border-$1"
             ;;
         -shadow)
             shift
-            shadow="shadow ${1}"
+            shadow="shadow $1"
             ;;
         -run)
             shift
@@ -122,66 +122,66 @@ while (( "$#" )); do
 done
 
 #Start Cards
-if [ -n "${run}" ];then
+if [ -n "$run" ];then
 cat << EOF
-<div class="card d-flex align-items-center justify-content-center rounded ${border} my-3 ${shadow}" role='button' onclick="_run('$run')">
+<div class="card d-flex align-items-center justify-content-center rounded $border my-3 $shadow" role='button' onclick="_run('$run')">
 EOF
-elif [ -n "${id}" ];then
+elif [ -n "$id" ];then
 cat << EOF
-<div class="card d-flex align-items-center justify-content-center rounded ${border} my-3 ${shadow}" role='button' data-bs-toggle="modal" data-bs-target="#${id}">
+<div class="card d-flex align-items-center justify-content-center rounded $border my-3 $shadow" role='button' data-bs-toggle="modal" data-bs-target="#$id">
 EOF
 fi
 
 #Imagen
-if [ -n "${image}" ];then
-    if [ -z "${imageMarginX}" ];then
+if [ -n "$image" ];then
+    if [ -z "$imageMarginX" ];then
         imageMarginX=2
     fi
-    if [ -z "${imageMarginY}" ];then
+    if [ -z "$imageMarginY" ];then
         imageMarginY=2
     fi
-    if [ -z "${imagePaddingX}" ];then
+    if [ -z "$imagePaddingX" ];then
         imagePaddingX=2
     fi
-    if [ -z "${imagePaddingY}" ];then
+    if [ -z "$imagePaddingY" ];then
         imagePaddingY=2
     fi
 cat << EOF
 <!--     <div class="card-body"> -->
-        <img src="${image}" width="${imageWidth}" height="${imageHeight}" class="img-fluid mx-${imageMarginX} my-${imageMarginY} px-${imagePaddingX} py-${imagePaddingY}"/>
+        <img src="$image" width="$imageWidth" height="$imageHeight" class="img-fluid mx-$imageMarginX my-$imageMarginY px-$imagePaddingX py-$imagePaddingY"/>
 <!--     </div> -->
 EOF
 fi
 
 #Title
-if [ -n "${title}" ];then
+if [ -n "$title" ];then
 cat << EOF
     <div class="card-body">
-        <h5 class="card-title">${title}</h5>
+        <h5 class="card-title">$title</h5>
     </div>
 EOF
 fi
 
 #Text
-if [ -n "${text}" ];then
+if [ -n "$text" ];then
 cat << EOF
     <div class="card-body">
-        <p class="card-text">${text}</p>
+        <p class="card-text">$text</p>
     </div>
 EOF
 fi
 
 #Icon-check
-if [ -n "${iconCheck}" ];then
+if [ -n "$iconCheck" ];then
 cat << EOF
-    <img src="${iconCheck}" width="${iconCheckSize}" height="${iconCheckSize}" class="mx-2 my-2 position-absolute ${iconCheckPosY}-0 ${iconCheckPosX}-0"/>
+    <img src="$iconCheck" width="$iconCheckSize" height="$iconCheckSize" class="mx-2 my-2 position-absolute ${iconCheckPosY}-0 ${iconCheckPosX}-0"/>
 EOF
 fi
 
 #Icon-Label
-if [ -n "${iconLabel}" ];then
+if [ -n "$iconLabel" ];then
 cat << EOF
-    <img src="${iconLabel}" width="${iconLabelkSize}" height="${iconLabelkSize}" class="mx-2 my-2 position-absolute ${iconLabelPosY}-0 ${iconLabelPosX}-0"/>
+    <img src="$iconLabel" width="$iconLabelkSize" height="$iconLabelkSize" class="mx-2 my-2 position-absolute ${iconLabelPosY}-0 ${iconLabelPosX}-0"/>
 EOF
 fi
 

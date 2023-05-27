@@ -48,7 +48,7 @@ usage() {
     echo '    end                       end modal'
     echo '    -title <title>            Title'
     echo '    -icon <icon.svg>          Icon file'
-    echo '    -id <id>     		        id'
+    echo '    -id <id>                  id'
     echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
     echo '    -run <file.run>           File to be executed when clicking the button'
     echo ''

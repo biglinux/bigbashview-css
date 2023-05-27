@@ -4,13 +4,13 @@
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -lineText <text>      Line text'
-    echo '    -icon <icon.svg>   	icon file'
-    echo '    -title <Title>     	Title'
-    echo '    -buttonType <type>	variable: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    -buttonText <text> 	Button text'
-    echo '    -id <id>     			id'
-    echo '    -class <class>     	class'
-    echo '    -border <number>     	1~5'
+    echo '    -icon <icon.svg>      icon file'
+    echo '    -title <Title>        Title'
+    echo '    -buttonType <type>    variable: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    -buttonText <text>    Button text'
+    echo '    -id <id>              id'
+    echo '    -class <class>        class'
+    echo '    -border <number>      1~5'
     echo ''
     exit "$1"
 }

@@ -37,7 +37,7 @@ done
 cat << EOF
 <div class="d-flex justify-content-center">
     <form class="form-check form-switch">
-    <button onclick="_run('${run}')" type="button" class="btn btn-${buttonType}">${buttonText}</button>
+    <button onclick="_run('$run')" type="button" class="btn btn-$buttonType">$buttonText</button>
     </form>
 </div>
 EOF

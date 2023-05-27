@@ -3,9 +3,9 @@
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo 'It is necessary to create a file with the same name as the ID ending in .nav with the content of each navTab'
-    echo '    -title <Title>     	    titles, use for translated text titles'
-    echo '    -id <id>     			    id, use for untranslated id'
-    echo '    -activeTab <id>     	    set the default tab, if not set the first one will be used'
+    echo '    -title <Title>            titles, use for translated text titles'
+    echo '    -id <id>                  id, use for untranslated id'
+    echo '    -activeTab <id>           set the default tab, if not set the first one will be used'
     echo ''
     exit "$1"
 }
