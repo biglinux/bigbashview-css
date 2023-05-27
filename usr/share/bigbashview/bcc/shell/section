@@ -21,7 +21,7 @@ else
     size=h1
 fi
 cat << EOF
-<${size} class="mb-2 mt-3 mx-5">${text}</${size}>
+<${size} class="mb-2 mt-3 mx-5">$text</$size>
 EOF
 }
 

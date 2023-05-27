@@ -48,7 +48,7 @@ while (( "$#" )); do
             ;;
         -bgColor)
             shift
-            bgColor="bg-${1}"
+            bgColor="bg-$1"
             ;;
         -check)
             shift
@@ -72,67 +72,67 @@ while (( "$#" )); do
             ;;
         -fontSize)
             shift
-            fontSize="h${1}"
+            fontSize="h$1"
             ;;
         -border)
             shift
-            border="border border-${1}"
+            border="border border-$1"
             ;;
         -margin)
             shift
-            margin="my-${1} mx-${1}"
+            margin="my-$1 mx-$1"
             ;;
         -marginTop)
             shift
-            marginTop="mt-${1}"
+            marginTop="mt-$1"
             ;;
         -marginBotton)
             shift
-            marginBotton="mb-${1}"
+            marginBotton="mb-$1"
             ;;
         -marginX)
             shift
-            marginX="mx-${1}"
+            marginX="mx-$1"
             ;;
         -marginLeft)
             shift
-            marginLeft="ms-${1}"
+            marginLeft="ms-$1"
             ;;
         -marginRight)
             shift
-            marginRight="me-${1}"
+            marginRight="me-$1"
             ;;
         -marginY)
             shift
-            marginY="my-${1}"
+            marginY="my-$1"
             ;;
         -padding)
             shift
-            padding="py-${1} px-${1}"
+            padding="py-$1 px-$1"
             ;;
         -paddingTop)
             shift
-            paddingTop="pt-${1}"
+            paddingTop="pt-$1"
             ;;
         -paddingBotton)
             shift
-            paddingBotton="pb-${1}"
+            paddingBotton="pb-$1"
             ;;
         -paddingX)
             shift
-            paddingX="px-${1}"
+            paddingX="px-$1"
             ;;
         -paddingLeft)
             shift
-            paddingLeft="ps-${1}"
+            paddingLeft="ps-$1"
             ;;
         -paddingRight)
             shift
-            paddingRight="pe-${1}"
+            paddingRight="pe-$1"
             ;;
         -paddingY)
             shift
-            paddingY="py-${1}"
+            paddingY="py-$1"
             ;;
         *)
             usage 1
@@ -143,21 +143,21 @@ done
 
 #abertura
 cat << EOF
-<div class="row align-items-center rounded ${border} ${bgColor} ${margin} ${marginTop} ${marginBotton} ${marginY} ${marginLeft} ${marginRight} ${marginX} ${padding} ${paddingTop} ${paddingBotton} ${paddingY} ${paddingLeft} ${paddingRight} ${paddingX}">
+<div class="row align-items-center rounded $border $bgColor $margin $marginTop $marginBotton $marginY $marginLeft $marginRight $marginX $padding $paddingTop $paddingBotton $paddingY $paddingLeft $paddingRight $paddingX">
   <div class="col-sm d-flex align-items-center">
 EOF
 
 #se tiver icone
-if [ -e "${icon}" ];then
+if [ -e "$icon" ];then
 cat << EOF
-    <img src="./${icon}" width="${iconPx}" height="${iconPx}" class="mx-1 me-2"/>
+    <img src="./$icon" width="$iconPx" height="$iconPx" class="mx-1 me-2"/>
 EOF
 fi
 
 #se tiver texto
-if [ -n "${text}" ];then
+if [ -n "$text" ];then
 cat << EOF
-    <label class="form-check-label" for="${id}">${text}</label>
+    <label class="form-check-label" for="$id">$text</label>
 EOF
 fi
 
@@ -171,7 +171,7 @@ EOF
 cat << EOF
     <div class="col-sm d-flex align-items-center justify-content-end">
         <form class="form-check form-switch">
-            <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}" ${check}/>
+            <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="$id" $check/>
         </form>
     </div>
 EOF
@@ -180,7 +180,7 @@ if [ -n "$check2" ];then
 cat << EOF
     <div class="col-sm d-flex align-items-center justify-content-end">
         <form class="form-check form-switch ms-2">
-            <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" id="${id}2" ${check2}/>
+            <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" id="${id}2" $check2/>
         </form>
     </div>
 EOF

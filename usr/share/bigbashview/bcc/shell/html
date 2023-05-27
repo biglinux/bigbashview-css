@@ -10,8 +10,8 @@ start() {
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <title>${title}</title>
-        <link rel='icon' href='${icon}'>
+        <title>$title</title>
+        <link rel='icon' href='$icon'>
         <link rel="stylesheet" href="/usr/share/bigbashview/bcc/css/bootstrap-biglinux.css">
         <link rel="stylesheet" href="/usr/share/javascript/bootstrap/css/bootstrap.css">
         <script src="/usr/share/javascript/bootstrap/js/bootstrap.bundle.js"></script>
@@ -22,31 +22,31 @@ start() {
 EOF
 }
 
-header(){
-cat << EOF
-<!--<header class="col-sm d-flex align-items-center justify-content-center py-3">
-    <nav class="nav nav-pills nav-justified">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><img src="icons/temas.svg" width="35px" height="35px" class="mx-1 me-2"/>Temas</button>
-        
-        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><img src="icons/desktops.svg" width="35px" height="35px" class="mx-1 me-2"/>Desktops</button>
-
-      </div>
-    </nav>
-</header>
-<div class="tab-content bg-secondary" id="nav-tabContent" >
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-      <label class="form-check-label" for="${id}">XPTO</label>
-  </div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-      <label class="form-check-label" for="${id}">otpx</label>
-  </div>
-</div>-->
-
-
-EOF
-}
+# header(){
+# cat << EOF
+# <!--<header class="col-sm d-flex align-items-center justify-content-center py-3">
+#     <nav class="nav nav-pills nav-justified">
+#       <div class="nav nav-tabs" id="nav-tab" role="tablist">
+#         
+#         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><img src="icons/temas.svg" width="35px" height="35px" class="mx-1 me-2"/>Temas</button>
+#         
+#         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><img src="icons/desktops.svg" width="35px" height="35px" class="mx-1 me-2"/>Desktops</button>
+# 
+#       </div>
+#     </nav>
+# </header>
+# <div class="tab-content bg-secondary" id="nav-tabContent" >
+#   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+#       <label class="form-check-label" for="${id}">XPTO</label>
+#   </div>
+#   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+#       <label class="form-check-label" for="${id}">otpx</label>
+#   </div>
+# </div>-->
+# 
+# 
+# EOF
+# }
 
 
 # Function to end the HTML document
