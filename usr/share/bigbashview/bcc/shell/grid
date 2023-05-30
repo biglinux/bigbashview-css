@@ -1,76 +1,47 @@
 #!/bin/bash
-start() {
-cat << EOF
+
+grid() {
+# usage
+    if [ "$1" = "help" ]; then
+    echo "Usage: ${0##*/} [options]"
+    echo '    start="start"            Start grid'
+    echo '    rowColumn="number"       number of columns per row'
+    echo '    colStart="colStart"      Start column'
+    echo '    colEnd="colEnd"          End column'
+    echo '    end="end"                end grid'
+    echo ''
+    fi
+
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
+
+rowColumn="${rowColumn:+row-cols-$rowColumn}"
+
+# start
+if [ -n "$start" ];then
+read -d $'' ShowText <<EOF
 <div class="container text-center">
   <div class="row $rowColumn">
 EOF
-}
-colStart() {
-cat << EOF
-    <div class="col">
-EOF
-}
-colEnd() {
-cat << EOF
-    </div>
-EOF
-}
-end() {
-cat << EOF
+echo "$ShowText"
+fi
+
+# colStart
+if [ -n "$colStart" ];then
+echo '<div class="col">'
+fi
+
+# colEnd
+if [ -n "$colEnd" ];then
+echo "</div>"
+fi
+
+# end
+if [ -n "$end" ];then
+read -d $'' ShowText <<EOF
   </div>
 </div>
 EOF
-}
-
-# Function to display usage message
-usage() {
-    echo "Usage: ${0##*/} [options]"
-    echo '    start                     Start grid'
-    echo '    colStart                  Start column'
-    echo '    colEnd                    End column'
-    echo '    end                       Start grid'
-    echo '    -rowColumn <number>       number of columns per row'
-    echo ''
-    exit "$1"
-}
-
-# Loop to process command-line arguments
-while (( "$#" )); do
-    case "$1" in
-        -rowColumn)
-            shift
-            rowColumn="row-cols-$1"
-            ;;
-        -s|start)
-            start_called=true
-            ;;
-        end)
-            end_called=true
-            ;;
-        colStart)
-	        colStart=true
-            ;;
-        colEnd)
-	        colEnd=true
-            ;;
-        *)
-            usage 1
-            ;;
-    esac
-    shift
-done
-
-# Check if start function should be called
-if [ "$start_called" = "true" ]; then
-    start
-# Check if end function should be called
-elif [ "$end_called" = "true" ]; then
-    end
+echo "$ShowText"
 fi
 
-# Check if column function should be called
-if [ "$colStart" = "true" ]; then
-    colStart
-elif [ "$colEnd" = "true" ]; then
-    colEnd
-fi
+}

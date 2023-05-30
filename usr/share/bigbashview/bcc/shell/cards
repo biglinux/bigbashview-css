@@ -3,7 +3,7 @@
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo '    -border <number>          value: 1~5'
-    echo '    -shadow <number>  value: 1~5'
+    echo '    -shadow <number>          value: 1~5'
     echo '    -run <file.run>           File to be executed when clicking the switch, dont use with -id'
     echo '    -id <id>                  id use on for modal, dont use with -run'
     echo '    -image <image.svg>        image file'

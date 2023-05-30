@@ -1,67 +1,28 @@
 #!/bin/bash
 
-# Function to display usage message
-usage() {
+line_button_modal() {
+# usage
+    if [ "$1" = "help" ]; then
     echo "Usage: ${0##*/} [options]"
-    echo '    -lineText <text>      Line text'
-    echo '    -icon <icon.svg>      icon file'
-    echo '    -title <Title>        Title'
-    echo '    -buttonType <type>    variable: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    -buttonText <text>    Button text'
-    echo '    -id <id>              id'
-    echo '    -class <class>        class'
-    echo '    -border <number>      1~5'
+    echo '    text="text"          Line text'
+    echo '    icon="icon.svg"      icon file'
+    echo '    buttonType="type"    variable: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    buttonText="text"    Button text'
+    echo '    id="id"              id'
+    echo '    class="class"        class'
+    echo '    border="number"      value: 1~5'
     echo ''
-    exit "$1"
-}
+    fi
 
-# Loop to process command-line arguments
-while (( "$#" )); do
-    case "$1" in
-        -lineText)
-            shift
-            lineText="$1"
-            ;;
-        -title)
-            shift
-            title="$1"
-            ;;
-        -icon)
-            shift
-            icon="$1"
-            ;;
-        -buttonText)
-            shift
-            buttonText="$1"
-            ;;
-        -id)
-            shift
-            id="$1"
-            ;;
-        -buttonType)
-            shift
-            buttonType="$1"
-            ;;
-        -class)
-            shift
-            class="$1"
-            ;;
-        -border)
-            shift
-            border="border border-$1"
-            ;;
-        *)
-            usage 1
-            ;;
-    esac
-    shift
-done
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
 
-cat << EOF
+border="${border:+border border-$border}"
+
+read -d $'' ShowText <<EOF
 <div class="row align-items-center bg-secondary text-white rounded py-3  mx-5 $border $class">
     <div class="col .col-sm-8 d-flex align-items-center">
         <img src="./$icon" width="20px" height="20px" class="mx-1"/>
-        <label class="form-check-label text-body cursor-pointer ms-1" for="flexSwitchCheckDefault">$lineText</label>
+        <label class="form-check-label text-body cursor-pointer ms-1" for="flexSwitchCheckDefault">$text</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
         <!-- Button trigger modal -->
@@ -71,5 +32,5 @@ cat << EOF
     </div>
 </div>
 EOF
-
- 
+echo "$ShowText"
+}

@@ -1,211 +1,117 @@
 #!/bin/bash
 
-usage() {
+switch() {
+    if [ "$1" = "help" ]; then
     echo "Usage: ${0##*/} [options]"
-    echo '    -text <text>              text to the switch'
-    echo '    -check <checked>          variable: unchecked, checked, disabled, checked disabled'
-    echo '    -run <file.run>           File to be executed when clicking the switch'
-    echo '    -icon <icon.svg>          Icon file'
-    echo '    -iconPx <number>          Icon size in PX'
-    echo '    -bgColor <value>          Available: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    -check <checked>          Available: checked, unchecked, disabled, checked disabled'
-    echo '    -fontSize <number>        value: 1~6'
-    echo '    -id <id>                  id'
-    echo '    -fontSize <number>        value: 1~6'
-    echo '    -border <number>          value: 1~5'
-    echo '    -margin <number>          value: 0~5, auto'
-    echo '    -marginTop <number>       value: 0~5, auto'
-    echo '    -marginBotton <number>    value: 0~5, auto'
-    echo '    -marginLeft <number>      value: 0~5, auto'
-    echo '    -marginRight <number>     value: 0~5, auto'
-    echo '    -marginX <number>         value: 0~5, auto'
-    echo '    -marginY <number>         value: 0~5, auto'
-    echo '    -padding <number>         value: 0~5, auto'
-    echo '    -paddingTop <number>      value: 0~5, auto'
-    echo '    -paddingBotton <number>   value: 0~5, auto'
-    echo '    -paddingLeft <number>     value: 0~5, auto'
-    echo '    -paddingRight <number>    value: 0~5, auto'
-    echo '    -paddingX <number>        value: 0~5, auto'
-    echo '    -paddingY <number>        value: 0~5, auto'
+    echo '    text="text"                 text to the switch'
+    echo '    check="checked"             variable: unchecked, checked, disabled, checked disabled'
+    echo '    run="file.run"              File to be executed when clicking the switch'
+    echo '    icon="icon.svg"             Icon file'
+    echo '    iconSize="number"           Icon size in Pixel'
+    echo '    bgColor="value"             Available: primary, secondary, success, danger, warning, info, light, dark, link'
+    echo '    check="checked"             Available: checked, unchecked, disabled, checked disabled'
+    echo '    check2="checked"            Available: checked, unchecked, disabled, checked disabled'
+    echo '    id="id"                     id'
+    echo '    id=2"id"                    id'
+    echo '    fontSize="number"           value: 1~6'
+    echo '    border="number"             value: 1~5'
+    echo '    margin="number"             value: 0~5, auto | for horizontal and vertical' 
+    echo '    marginTop="number"          value: 0~5, auto'
+    echo '    marginBotton="number"       value: 0~5, auto'
+    echo '    marginLeft="number"         value: 0~5, auto'
+    echo '    marginRight="number"        value: 0~5, auto'
+    echo '    marginHorizontal="number"   value: 0~5, auto'
+    echo '    marginVertical="number"     value: 0~5, auto'
+    echo '    padding="number"            value: 0~5, auto | for horizontal and vertical'
+    echo '    paddingTop="number"         value: 0~5, auto'
+    echo '    paddingBotton="number"      value: 0~5, auto'
+    echo '    paddingLeft="number"        value: 0~5, auto'
+    echo '    paddingRight="number"       value: 0~5, auto'
+    echo '    paddingHorizontal="number"  value: 0~5, auto'
+    echo '    paddingVertical="number"    value: 0~5, auto'
     echo ''
-    exit "$1"
-}
+    fi
 
-# Loop to process command-line arguments
-while (( "$#" )); do
-    case "$1" in
-        -text)
-            shift
-            text="$1"
-            ;;
-        -icon)
-            shift
-            icon="$1"
-            ;;
-        -iconPx)
-            shift
-            iconPx="${1}px"
-            ;;
-        -bgColor)
-            shift
-            bgColor="bg-$1"
-            ;;
-        -check)
-            shift
-            check="$1"
-            ;;
-        -check2)
-            shift
-            check2="$1"
-            ;;
-        -run)
-            shift
-            run="$1"
-            ;;
-        -run2)
-            shift
-            run2="$1"
-            ;;
-        -id)
-            shift
-            id="$1"
-            ;;
-        -fontSize)
-            shift
-            fontSize="h$1"
-            ;;
-        -border)
-            shift
-            border="border border-$1"
-            ;;
-        -margin)
-            shift
-            margin="my-$1 mx-$1"
-            ;;
-        -marginTop)
-            shift
-            marginTop="mt-$1"
-            ;;
-        -marginBotton)
-            shift
-            marginBotton="mb-$1"
-            ;;
-        -marginX)
-            shift
-            marginX="mx-$1"
-            ;;
-        -marginLeft)
-            shift
-            marginLeft="ms-$1"
-            ;;
-        -marginRight)
-            shift
-            marginRight="me-$1"
-            ;;
-        -marginY)
-            shift
-            marginY="my-$1"
-            ;;
-        -padding)
-            shift
-            padding="py-$1 px-$1"
-            ;;
-        -paddingTop)
-            shift
-            paddingTop="pt-$1"
-            ;;
-        -paddingBotton)
-            shift
-            paddingBotton="pb-$1"
-            ;;
-        -paddingX)
-            shift
-            paddingX="px-$1"
-            ;;
-        -paddingLeft)
-            shift
-            paddingLeft="ps-$1"
-            ;;
-        -paddingRight)
-            shift
-            paddingRight="pe-$1"
-            ;;
-        -paddingY)
-            shift
-            paddingY="py-$1"
-            ;;
-        *)
-            usage 1
-            ;;
-    esac
-    shift
-done
+
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
+# icon=
+# text=
+# id=
+# id2=
+# run=
+# run2=
+# check=
+# check2=
+
+
+iconSize="${iconSize:+$iconSize-px}"
+bgColor="${bgColor:+bg-$bgColor}"
+fontSize="${fontSize:+h$fontSize}"
+border="${border:+border border-$border}"
+margin="${margin:+my-$margin mx-$margin}"
+marginTop="${marginTop:+mt-$marginTop}"
+marginBotton="${marginBotton:+mb-$marginBotton}"
+marginLeft="${marginLeft:+ms-$marginLeft}"
+marginRight="${marginRight:+me-$marginRight}"
+marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
+marginVertical="${marginVertical:+my-$marginVertical}"
+padding="${padding:+py-$padding px-$padding}"
+paddingTop="${paddingTop:+pt-$paddingTop}"
+paddingBotton="${paddingBotton:+pb-$paddingBotton}"
+paddingLeft="${paddingLeft:+ps-$paddingLeft}"
+paddingRight="${paddingRight:+pe-$paddingRight}"
+paddingHorizontal="${paddingHorizontal:+px-$paddingHorizontal}"
+paddingVertical="${paddingVertical:+py-$paddingVertical}"
 
 #abertura
-cat << EOF
-<div class="row align-items-center rounded $border $bgColor $margin $marginTop $marginBotton $marginY $marginLeft $marginRight $marginX $padding $paddingTop $paddingBotton $paddingY $paddingLeft $paddingRight $paddingX">
+read -d $'' ShowText <<EOF
+<div class="row align-items-center rounded $border $bgColor $margin $marginTop $marginBotton $marginLeft $marginRight $marginHorizontal $marginVertical $padding $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical">
   <div class="col-sm d-flex align-items-center">
 EOF
+echo "$ShowText"
 
 #se tiver icone
-if [ -e "$icon" ];then
-cat << EOF
-    <img src="./$icon" width="$iconPx" height="$iconPx" class="mx-1 me-2"/>
+if [ -n "$icon" ];then
+read -d $'' ShowText <<EOF
+    <img src="$icon" width="$iconSize" height="$iconSize" class="mx-1 me-2"/>
 EOF
+echo "$ShowText"
 fi
 
 #se tiver texto
 if [ -n "$text" ];then
-cat << EOF
+read -d $'' ShowText <<EOF
     <label class="form-check-label" for="$id">$text</label>
 EOF
+echo "$ShowText"
 fi
 
 #fechamento 
-cat << EOF
-</div>
-EOF
-
+echo '</div>'
 
 #botão switch
-cat << EOF
+read -d $'' ShowText <<EOF
     <div class="col-sm d-flex align-items-center justify-content-end">
         <form class="form-check form-switch">
-            <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="$id" $check/>
+            <input onclick="_run('$run')" class="form-check-input" type="checkbox" role="switch" id="$id" $check/>
         </form>
     </div>
 EOF
+echo "$ShowText"
 
+#botão switch2
 if [ -n "$check2" ];then
-cat << EOF
+read -d $'' ShowText <<EOF
     <div class="col-sm d-flex align-items-center justify-content-end">
         <form class="form-check form-switch ms-2">
-            <input onclick="_run('./$run2')" class="form-check-input" type="checkbox" role="switch" id="${id}2" $check2/>
+            <input onclick="_run('$run2')" class="form-check-input" type="checkbox" role="switch" id="$id2" $check2/>
         </form>
     </div>
 EOF
+echo "$ShowText"
 fi
 
 #fechamento
-cat << EOF
-  </div>
-</div>
-EOF
-
-
-
-
-# cat << EOF
-# <div class="form-check form-switch">
-#   <input onclick="_run('./$run')" class="form-check-input" type="checkbox" role="switch" id="${id}" $checked>
-# EOF
-# 
-# if [ -n "$text" ];then
-# cat << EOF
-#     <label class="form-check-label ${fontSize}" for="${id}">${rightText}</label>
-# <!--     <span class="text-start ${fontSize}">${rightText}</span> -->
-# EOF
-# fi
-# cat << EOF
-# </div>
-# EOF
+echo "  </div>"
+echo "</div>"
+}

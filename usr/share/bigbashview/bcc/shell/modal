@@ -1,6 +1,23 @@
 #!/bin/bash
-start() {
-cat << EOF
+
+modal() {
+# usage
+    if [ "$1" = "help" ]; then
+    echo '    start="start"             start modal'
+    echo '    title="title"             Title'
+    echo '    id="id"                   id'
+    echo '    run="file.run"            File to be executed when clicking the button'
+    echo '    footerStart="start"       start footer'
+    echo '    footerEnd="end"           end footer'
+    echo '    end="end"                 end modal'
+    echo ''
+    fi
+
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
+
+# start
+if [ -n "$start" ];then
+read -d $'' ShowText <<EOF
 <!-- Modal -->
 <div class="modal fade" id="$id" tabindex="-1" aria-labelledby="${id}Label" aria-hidden="true">
   <div class="modal-dialog">
@@ -11,107 +28,37 @@ cat << EOF
       </div>
       <div class="modal-body">
 EOF
-}
-end() {
-cat << EOF
+echo "$ShowText"
+fi
+
+# end
+if [ -n "$end" ];then
+read -d $'' ShowText <<EOF
       </div>
-<!--       <div class="modal-footer"> -->
-<!--         <button type="button" class="btn btn-$buttonType" data-bs-dismiss="modal">Close</button> -->
-<!--       </div> -->
     </div>
   </div>
 </div>
 EOF
-}
-run() {
+echo "$ShowText"
+fi
+
+# run
+if [ -n "$run" ];then
 	bash "$run"
-}
-footerStart() {
-cat << EOF
+fi
+
+# footerStart
+if [ -n "$footerStart" ];then
+read -d $'' ShowText <<EOF
     <p></p>
 	<div class="modal-footer">
 EOF
-}
-footerEnd() {
-cat << EOF
-	</div>
-EOF
-}
-
-# Function to display usage message
-usage() {
-    echo "Usage: ${0##*/} [options]"
-    echo '    start                     start modal'
-    echo '    body <file>               modal body'
-    echo '    footerStart               start footer'
-    echo '    footerEnd                 end footer'
-    echo '    end                       end modal'
-    echo '    -title <title>            Title'
-    echo '    -icon <icon.svg>          Icon file'
-    echo '    -id <id>                  id'
-    echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    -run <file.run>           File to be executed when clicking the button'
-    echo ''
-    exit "$1"
-}
-
-# Loop to process command-line arguments
-while (( "$#" )); do
-    case "$1" in
-        -title)
-            shift
-            title="$1"
-            ;;
-        -icon)
-            shift
-            icon="$1"
-            ;;
-        -id)
-            shift
-            id="$1"
-            ;;
-        -buttonType)
-            shift
-            buttonType="$1"
-            ;;
-        -run)
-            shift
-            run="$1"
-            ;;
-        -s|start)
-            start_called=true
-            ;;
-        end)
-            end_called=true
-            ;;
-        footerStart)
-	        footerStart_called=true
-            ;;
-        footerEnd)
-	        footerEnd_called=true
-            ;;
-        *)
-            usage 1
-            ;;
-    esac
-    shift
-done
-
-# Check if start function should be called
-if [ "$start_called" = "true" ]; then
-    start
-# Check if end function should be called
-elif [ "$end_called" = "true" ]; then
-    end
+echo "$ShowText"
 fi
 
-# Chaeck if body function should be called
-if [ "$footerStart_called" = "true" ]; then
-    footerStart
-elif [ "$footerEnd_called" = "true" ]; then
-    footerEnd
+# footerEnd
+if [ -n "$footerEnd" ];then
+echo "</div>"
 fi
 
-if [ -n "$run" ];then
-    run
-fi
+}
