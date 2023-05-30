@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LANG=C
+
 modal() {
 # usage
     if [ "$1" = "help" ]; then

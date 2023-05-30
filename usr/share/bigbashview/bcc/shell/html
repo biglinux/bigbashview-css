@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LANG=C
+
 html() {
     if [ "$1" = "help" ]; then
     echo "Usage: ${0##*/} [options]"
