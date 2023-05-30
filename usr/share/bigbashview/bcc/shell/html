@@ -1,10 +1,21 @@
 #!/bin/bash
-# start_html: Start HTML document.
-# 2023/16/05
+
+html() {
+    if [ "$1" = "help" ]; then
+    echo "Usage: ${0##*/} [options]"
+    echo '    start="start"        start the html, import the css and js'
+    echo '    end="end"            finalize the html'
+    echo '    title="title"        page title'
+    echo '    icon="icon.svg"      page icon'
+    echo ''
+    fi
+
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
+
 
 # Function to start the HTML document
-start() {
-    cat << EOF
+if [ -n "$start" ];then
+read -d $'' ShowText <<EOF
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,10 +31,13 @@ start() {
     </head>
     <body class="bg-primary">
 EOF
-}
+echo "$ShowText"
+fi
 
-# header(){
-# cat << EOF
+
+# header
+
+# read -d $'' ShowText <<EOF
 # <!--<header class="col-sm d-flex align-items-center justify-content-center py-3">
 #     <nav class="nav nav-pills nav-justified">
 #       <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -43,64 +57,15 @@ EOF
 #       <label class="form-check-label" for="${id}">otpx</label>
 #   </div>
 # </div>-->
-# 
-# 
+#
+#
 # EOF
-# }
+# echo "$ShowText"
 
 
 # Function to end the HTML document
-end() {
-    cat << EOF
-</html>
-EOF
-}
-
-# Function to display usage message
-usage() {
-    echo "Usage: ${0##*/} [options]"
-    echo '    start                start the html, import the css and js'
-    echo '    end                  finalize the html'
-    echo '    -title <title>       page title'
-    echo '    -icon <icon.svg>     page icon'
-    echo ''
-    exit "$1"
-}
-
-# Loop to process command-line arguments
-while (( "$#" )); do
-    case "$1" in
-        -title)
-            shift
-            title="$1"
-            ;;
-        -icon)
-            shift
-            icon="$1"
-            ;;
-        -s|start)
-            start_called=true
-            ;;
-        end)
-            end_called=true
-            ;;
-        header)
-            header=true
-            ;;
-        *)
-            usage 1
-            ;;
-    esac
-    shift
-done
-
-# Check if start function should be called
-if [ "$start_called" = "true" ]; then
-    start
-# Check if end function should be called
-elif [ "$end_called" = "true" ]; then
-    end
-# Check if header function should be called
-elif [ "$header" = "true" ]; then
-    header
+# end
+if [ -n "$end" ];then
+echo '</html>'
 fi
+}
