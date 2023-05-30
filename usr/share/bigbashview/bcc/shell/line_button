@@ -1,9 +1,8 @@
 #!/bin/bash
 
-LANG=C
-
 # Function to display usage message
 usage() {
+    LANG=C
     echo "Usage: ${0##*/} [options]"
     echo '    -lineText <text>          Line text'
     echo '    -icon <icon.svg>          Icon file'

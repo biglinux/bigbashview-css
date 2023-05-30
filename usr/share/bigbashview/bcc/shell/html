@@ -1,8 +1,7 @@
 #!/bin/bash
 
-LANG=C
-
 html() {
+    LANG=C
     if [ "$1" = "help" ]; then
     echo "Usage: ${0##*/} [options]"
     echo '    start="start"        start the html, import the css and js'

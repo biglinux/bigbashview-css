@@ -1,9 +1,8 @@
 #!/bin/bash
 
-LANG=C
-
 grid() {
 # usage
+    LANG=C
     if [ "$1" = "help" ]; then
     echo "Usage: ${0##*/} [options]"
     echo '    start="start"            Start grid'

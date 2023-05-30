@@ -1,9 +1,8 @@
 #!/bin/bash
 
-LANG=C
-
 modal() {
 # usage
+    LANG=C
     if [ "$1" = "help" ]; then
     echo '    start="start"             start modal'
     echo '    title="title"             Title'

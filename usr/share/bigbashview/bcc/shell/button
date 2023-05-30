@@ -1,9 +1,8 @@
 #!/bin/bash
 
-LANG=C
-
 # Function to display usage message
 usage() {
+    LANG=C
     echo "Usage: ${0##*/} [options]"
     echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
     echo '    -buttonText <text>        Button text'

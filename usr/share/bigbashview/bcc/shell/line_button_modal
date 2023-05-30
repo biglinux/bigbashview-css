@@ -1,9 +1,8 @@
 #!/bin/bash
 
-LANG=C
-
 line_button_modal() {
 # usage
+    LANG=C
     if [ "$1" = "help" ]; then
     echo "Usage: ${0##*/} [options]"
     echo '    text="text"          Line text'
