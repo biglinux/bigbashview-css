@@ -13,7 +13,7 @@ section() {
 
 #It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
 
-fontSize="${fontSize:+h$fontSize}"
+
 
 # start
 if [ -n "$start" ];then
@@ -30,7 +30,7 @@ fi
 
 #fontSize
 if [ -n "$fontSize" ];then
-    fsize=$fontSize
+    fontSize="${fontSize:+h$fontSize}"
 else
     fsize=h1
 fi

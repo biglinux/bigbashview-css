@@ -54,16 +54,21 @@ if [ -z "$bgColor" ];then
     bgColor=secondary
 fi
 
-iconSize="${iconSize:+$iconSize-px}"
-bgColor="${bgColor:+bg-$bgColor}"
-fontSize="${fontSize:+h$fontSize}"
+#marginHorizontal
+if [ -z "$marginHorizontal" ];then
+    marginHorizontal=0
+fi
+
+# iconSize="${iconSize:+$iconSize-px}"
+# bgColor="${bgColor:+bg-$bgColor}"
+## fontSize="${fontSize:+h$fontSize}" ##
 border="${border:+border border-$border}"
 margin="${margin:+my-$margin mx-$margin}"
 marginTop="${marginTop:+mt-$marginTop}"
 marginBotton="${marginBotton:+mb-$marginBotton}"
 marginLeft="${marginLeft:+ms-$marginLeft}"
 marginRight="${marginRight:+me-$marginRight}"
-marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
+# marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
 marginVertical="${marginVertical:+my-$marginVertical}"
 padding="${padding:+py-$padding px-$padding}"
 paddingTop="${paddingTop:+pt-$paddingTop}"
@@ -75,7 +80,7 @@ paddingVertical="${paddingVertical:+py-$paddingVertical}"
 
 #abertura
 read -d $'' ShowText <<EOF
-<div class="row align-items-center rounded $border $bgColor $margin $marginTop $marginBotton $marginLeft $marginRight $marginHorizontal $marginVertical $padding $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical">
+<div class="row align-items-center rounded $border bg-$bgColor $marginTop $marginBotton $marginLeft $marginRight mx-$marginHorizontal $marginVertical $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical">
   <div class="col-sm d-flex align-items-center">
 EOF
 echo "$ShowText"
@@ -83,7 +88,7 @@ echo "$ShowText"
 #se tiver icone
 if [ -n "$icon" ];then
 read -d $'' ShowText <<EOF
-    <img src="$icon" width="$iconSize" height="$iconSize" class="mx-1 me-2"/>
+    <img src="$icon" width="$iconSize-px" height="$iconSize-px" class="mx-1 me-2"/>
 EOF
 echo "$ShowText"
 fi
