@@ -48,7 +48,7 @@ EOF
 echo "$ShowText"
 
 #buttonModal
-if [ -n "$buttonModal" ]
+if [ -n "$buttonModal" ];then
 read -d $'' ShowText <<EOF
         <button type="button" class="btn btn-$buttonType" data-bs-toggle="modal" data-bs-target="#$id">$buttonText</button>
     </div>
