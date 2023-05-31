@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    LANG=C
+    local LANG=C
     echo "Usage: ${0##*/} [options]"
     echo 'It is necessary to create a file with the same name as the ID ending in .nav with the content of each navTab'
     echo '    -title <Title>            titles, use for translated text titles'

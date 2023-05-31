@@ -1,7 +1,7 @@
 #!/bin/bash
 
 switch() {
-    LANG=C
+    local LANG=C
     if [ "$1" = "help" ]; then
         echo "Usage: ${0##*/} [options]"
         echo '    text="text"                 text to the switch'
@@ -67,21 +67,21 @@ fi
 # iconSize="${iconSize:+$iconSize-px}"
 # bgColor="${bgColor:+bg-$bgColor}"
 ## fontSize="${fontSize:+h$fontSize}" ##
-border="${border:+border border-$border}"
-margin="${margin:+my-$margin mx-$margin}"
-marginTop="${marginTop:+mt-$marginTop}"
-marginBotton="${marginBotton:+mb-$marginBotton}"
-marginLeft="${marginLeft:+ms-$marginLeft}"
-marginRight="${marginRight:+me-$marginRight}"
+local border="${border:+border border-$border}"
+local margin="${margin:+my-$margin mx-$margin}"
+local marginTop="${marginTop:+mt-$marginTop}"
+local marginBotton="${marginBotton:+mb-$marginBotton}"
+local marginLeft="${marginLeft:+ms-$marginLeft}"
+local marginRight="${marginRight:+me-$marginRight}"
 # marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
-marginVertical="${marginVertical:+my-$marginVertical}"
-padding="${padding:+py-$padding px-$padding}"
-paddingTop="${paddingTop:+pt-$paddingTop}"
-paddingBotton="${paddingBotton:+pb-$paddingBotton}"
-paddingLeft="${paddingLeft:+ps-$paddingLeft}"
-paddingRight="${paddingRight:+pe-$paddingRight}"
-paddingHorizontal="${paddingHorizontal:+px-$paddingHorizontal}"
-paddingVertical="${paddingVertical:+py-$paddingVertical}"
+local marginVertical="${marginVertical:+my-$marginVertical}"
+local padding="${padding:+py-$padding px-$padding}"
+local paddingTop="${paddingTop:+pt-$paddingTop}"
+local paddingBotton="${paddingBotton:+pb-$paddingBotton}"
+local paddingLeft="${paddingLeft:+ps-$paddingLeft}"
+local paddingRight="${paddingRight:+pe-$paddingRight}"
+local paddingHorizontal="${paddingHorizontal:+px-$paddingHorizontal}"
+local paddingVertical="${paddingVertical:+py-$paddingVertical}"
 
 #abertura
 read -d $'' ShowText <<EOF
