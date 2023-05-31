@@ -44,25 +44,18 @@ switch() {
 # check=
 # check2=
 
-#iconSize
-if [ -z "$iconSize" ];then
-    iconSize="20"
-fi
+# Definir valor padrão para iconSize se não estiver definido
+: ${iconSize:=20}
 
-#bgColor
-if [ -z "$bgColor" ];then
-    bgColor="secondary"
-fi
+# Definir valor padrão para bgColor se não estiver definido
+: ${bgColor:=secondary}
 
-#marginHorizontal
-if [ -z "$marginHorizontal" ];then
-    marginHorizontal="0"
-fi
+# Definir valor padrão para marginHorizontal se não estiver definido
+: ${marginHorizontal:=0}
 
-#fontSize
-if [ -n "$fontSize" ];then
-    fontSize="6"
-fi
+# Definir valor padrão para fontSize se não estiver definido
+: ${fontSize:=6}
+
 
 # iconSize="${iconSize:+$iconSize-px}"
 # bgColor="${bgColor:+bg-$bgColor}"

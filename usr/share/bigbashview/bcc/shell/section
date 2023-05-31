@@ -30,9 +30,9 @@ fi
 
 #fontSize
 if [ -n "$fontSize" ];then
-    fontSize="${fontSize:+h$fontSize}"
+    local fontSize="${fontSize:+h$fontSize}"
 else
-    fontSize=h1
+    local fontSize=h1
 fi
 
 # text

@@ -21,22 +21,22 @@ line_button() {
 
 #buttonType
 if [ -z "$buttonType" ];then
-    buttonType=primary
+     local buttonType=primary
 fi
 
 #iconSize
 if [ -z "$iconSize" ];then
-    iconSize=20
+     local iconSize=20
 fi
 
 #bgColor
 if [ -z "$bgColor" ];then
-    bgColor=secondary
+     local bgColor=secondary
 fi
 
 #fontSize
 if [ -n "$fontSize" ];then
-    fontSize="6"
+    local fontSize="6"
 fi
 
 border="${border:+border border-$border}"
