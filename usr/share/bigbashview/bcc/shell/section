@@ -32,13 +32,13 @@ fi
 if [ -n "$fontSize" ];then
     fontSize="${fontSize:+h$fontSize}"
 else
-    fsize=h1
+    fontSize=h1
 fi
 
 # text
 if [ -n "$text" ];then
 read -d $'' ShowText <<EOF
-<${fsize} class="mb-2 mt-3 mx-5">$text</$fsize>
+<$fontSize class="mb-2 mt-3 mx-5">$text</$fontSize>
 EOF
 echo "$ShowText"
 fi
