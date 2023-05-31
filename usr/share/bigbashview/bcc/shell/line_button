@@ -66,4 +66,5 @@ read -d $'' ShowText <<EOF
 </div>
 EOF
 echo "$ShowText"
+fi
 }
