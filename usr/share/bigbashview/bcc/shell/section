@@ -3,18 +3,17 @@
 section() {
     LANG=C
     if [ "$1" = "help" ]; then
-    echo "Usage: ${0##*/} [options]"
-    echo '    start="start"        section start'
-    echo '    end="end"            section end'
-    echo '    text="text"          text to the section'
-    echo '    fontSize="number"    value: 1~6'
-    echo ''
+        echo "Usage: ${0##*/} [options]"
+        echo '    start="start"        section start'
+        echo '    end="end"            section end'
+        echo '    text="text"          text to the section'
+        echo '    fontSize="number"    value: 1~6'
+        echo ''
     fi
 
 #It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
 
 fontSize="${fontSize:+h$fontSize}"
-
 
 # start
 if [ -n "$start" ];then

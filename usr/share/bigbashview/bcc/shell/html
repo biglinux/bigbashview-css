@@ -3,12 +3,12 @@
 html() {
     LANG=C
     if [ "$1" = "help" ]; then
-    echo "Usage: ${0##*/} [options]"
-    echo '    start="start"        start the html, import the css and js'
-    echo '    end="end"            finalize the html'
-    echo '    title="title"        page title'
-    echo '    icon="icon.svg"      page icon'
-    echo ''
+        echo "Usage: ${0##*/} [options]"
+        echo '    start="start"        start the html, import the css and js'
+        echo '    end="end"            finalize the html'
+        echo '    title="title"        page title'
+        echo '    icon="icon.svg"      page icon'
+        echo ''
     fi
 
 #It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script

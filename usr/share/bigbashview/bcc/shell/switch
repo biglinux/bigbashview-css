@@ -3,34 +3,34 @@
 switch() {
     LANG=C
     if [ "$1" = "help" ]; then
-    echo "Usage: ${0##*/} [options]"
-    echo '    text="text"                 text to the switch'
-    echo '    check="checked"             variable: unchecked, checked, disabled, checked disabled'
-    echo '    run="file.run"              File to be executed when clicking the switch'
-    echo '    icon="icon.svg"             Icon file'
-    echo '    iconSize="number"           Icon size in Pixel'
-    echo '    bgColor="value"             Available: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    check="checked"             Available: checked, unchecked, disabled, checked disabled'
-    echo '    check2="checked"            Available: checked, unchecked, disabled, checked disabled'
-    echo '    id="id"                     id'
-    echo '    id=2"id"                    id'
-    echo '    fontSize="number"           value: 1~6'
-    echo '    border="number"             value: 1~5'
-    echo '    margin="number"             value: 0~5, auto | for horizontal and vertical' 
-    echo '    marginTop="number"          value: 0~5, auto'
-    echo '    marginBotton="number"       value: 0~5, auto'
-    echo '    marginLeft="number"         value: 0~5, auto'
-    echo '    marginRight="number"        value: 0~5, auto'
-    echo '    marginHorizontal="number"   value: 0~5, auto'
-    echo '    marginVertical="number"     value: 0~5, auto'
-    echo '    padding="number"            value: 0~5, auto | for horizontal and vertical'
-    echo '    paddingTop="number"         value: 0~5, auto'
-    echo '    paddingBotton="number"      value: 0~5, auto'
-    echo '    paddingLeft="number"        value: 0~5, auto'
-    echo '    paddingRight="number"       value: 0~5, auto'
-    echo '    paddingHorizontal="number"  value: 0~5, auto'
-    echo '    paddingVertical="number"    value: 0~5, auto'
-    echo ''
+        echo "Usage: ${0##*/} [options]"
+        echo '    text="text"                 text to the switch'
+        echo '    check="checked"             variable: unchecked, checked, disabled, checked disabled'
+        echo '    run="file.run"              File to be executed when clicking the switch'
+        echo '    icon="icon.svg"             Icon file'
+        echo '    iconSize="number"           Icon size in Pixel'
+        echo '    bgColor="value"             Available: primary, secondary, success, danger, warning, info, light, dark, link'
+        echo '    check="checked"             Available: checked, unchecked, disabled, checked disabled'
+        echo '    check2="checked"            Available: checked, unchecked, disabled, checked disabled'
+        echo '    id="id"                     id'
+        echo '    id=2"id"                    id'
+        echo '    fontSize="number"           value: 1~6'
+        echo '    border="number"             value: 1~5'
+        echo '    margin="number"             value: 0~5, auto | for horizontal and vertical' 
+        echo '    marginTop="number"          value: 0~5, auto'
+        echo '    marginBotton="number"       value: 0~5, auto'
+        echo '    marginLeft="number"         value: 0~5, auto'
+        echo '    marginRight="number"        value: 0~5, auto'
+        echo '    marginHorizontal="number"   value: 0~5, auto'
+        echo '    marginVertical="number"     value: 0~5, auto'
+        echo '    padding="number"            value: 0~5, auto | for horizontal and vertical'
+        echo '    paddingTop="number"         value: 0~5, auto'
+        echo '    paddingBotton="number"      value: 0~5, auto'
+        echo '    paddingLeft="number"        value: 0~5, auto'
+        echo '    paddingRight="number"       value: 0~5, auto'
+        echo '    paddingHorizontal="number"  value: 0~5, auto'
+        echo '    paddingVertical="number"    value: 0~5, auto'
+        echo ''
     fi
 
 
@@ -44,6 +44,15 @@ switch() {
 # check=
 # check2=
 
+#iconSize
+if [ -z "$iconSize" ];then
+    iconSize=20
+fi
+
+#bgColor
+if [ -z "$bgColor" ];then
+    bgColor=secondary
+fi
 
 iconSize="${iconSize:+$iconSize-px}"
 bgColor="${bgColor:+bg-$bgColor}"

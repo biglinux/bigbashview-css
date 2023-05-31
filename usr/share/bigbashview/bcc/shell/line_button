@@ -1,59 +1,69 @@
 #!/bin/bash
 
-# Function to display usage message
-usage() {
+line_button() {
     LANG=C
-    echo "Usage: ${0##*/} [options]"
-    echo '    -lineText <text>          Line text'
-    echo '    -icon <icon.svg>          Icon file'
-    echo '    -buttonType <type>        variable: primary, secondary, success, danger, warning, info, light, dark, link'
-    echo '    -buttonText <text>        Button text'
-    echo '    -run <file.run>           File to be executed when clicking the button'
-    echo ''
-    exit "$1"
-}
+    if [ "$1" = "help" ]; then
+        echo "Usage: ${0##*/} [options]"
+        echo '    text="text"          Line text'
+        echo '    icon="icon.svg"      icon file'
+        echo '    buttonType="type"    variable: primary, secondary, success, danger, warning, info, light, dark, link'
+        echo '    buttonText="text"    Button text'
+        echo '    buttonModal="modal"  if not declare modal will use default run button'
+        echo '    id="id"              id'
+        echo '    class="class"        class'
+        echo '    border="number"      value: 1~5'
+        echo '    bgColor="value"      Available: primary, secondary, success, danger, warning, info, light, dark, link'
+        echo ''
+    fi
 
-# Loop to process command-line arguments
-while (( "$#" )); do
-    case "$1" in
-        -lineText)
-            shift
-            lineText="$1"
-            ;;
-        -icon)
-            shift
-            icon="$1"
-            ;;
-        -buttonType)
-            shift
-            buttonType="$1"
-            ;;
-        -buttonText)
-            shift
-            buttonText="$1"
-            ;;
-        -run)
-            shift
-            run="$1"
-            ;;
-        *)
-            usage 1
-            ;;
-    esac
-    shift
-done
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
 
-cat << EOF
-<div class="row align-items-center bg-secondary text-white rounded py-3 mx-5 border">
+#buttonType
+if [ -z "$buttonType" ];then
+    buttonType=primary
+fi
+
+#iconSize
+if [ -z "$iconSize" ];then
+    iconSize=20
+fi
+
+#bgColor
+if [ -z "$bgColor" ];then
+    bgColor=secondary
+fi
+
+border="${border:+border border-$border}"
+iconSize="${iconSize:+$iconSize-px}"
+bgColor="${bgColor:+bg-$bgColor}"
+
+read -d $'' ShowText <<EOF
+<div class="row align-items-center $bgColor text-white rounded py-3 mx-5 $border $class">
     <div class="col .col-sm-8 d-flex align-items-center">
-        <img src="./$icon" width="20px" height="20px" class="mx-1"/>
-        <label class="form-check-label text-body cursor-pointer ms-2" for="flexSwitchCheckDefault">${lineText}</label>
+        <img src="./$icon" width="$iconSizex" height="$iconSize" class="mx-1"/>
+        <label class="form-check-label text-body cursor-pointer ms-1" for="flexSwitchCheckDefault">$text</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
+EOF
+echo "$ShowText"
+
+#buttonModal
+if [ -n "$buttonModal" ]
+read -d $'' ShowText <<EOF
+        <button type="button" class="btn btn-$buttonType" data-bs-toggle="modal" data-bs-target="#$id">$buttonText</button>
+    </div>
+</div>
+EOF
+echo "$ShowText"
+
+#buttonRun
+else
+read -d $'' ShowText <<EOF
         <form class="form-check form-switch">
         <button onclick="_run('./$run')" type="button" class="btn btn-$buttonType">$buttonText</button>
         </form>
     </div>
 </div>
 EOF
-
+echo "$ShowText"
+}
