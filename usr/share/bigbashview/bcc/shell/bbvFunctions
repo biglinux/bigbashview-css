@@ -4,5 +4,5 @@
 . /usr/share/bigbashview/bcc/shell/switch
 . /usr/share/bigbashview/bcc/shell/section
 . /usr/share/bigbashview/bcc/shell/modal
-. /usr/share/bigbashview/bcc/shell/line_button_modal
+. /usr/share/bigbashview/bcc/shell/line_button
 . /usr/share/bigbashview/bcc/shell/grid
