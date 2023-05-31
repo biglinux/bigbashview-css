@@ -46,17 +46,22 @@ switch() {
 
 #iconSize
 if [ -z "$iconSize" ];then
-    iconSize=20
+    iconSize="20"
 fi
 
 #bgColor
 if [ -z "$bgColor" ];then
-    bgColor=secondary
+    bgColor="secondary"
 fi
 
 #marginHorizontal
 if [ -z "$marginHorizontal" ];then
-    marginHorizontal=0
+    marginHorizontal="0"
+fi
+
+#fontSize
+if [ -n "$fontSize" ];then
+    fontSize="6"
 fi
 
 # iconSize="${iconSize:+$iconSize-px}"
@@ -96,7 +101,7 @@ fi
 #se tiver texto
 if [ -n "$text" ];then
 read -d $'' ShowText <<EOF
-    <label class="form-check-label" for="$id">$text</label>
+    <label class="form-check-label fs-$fontSize" for="$id">$text</label>
 EOF
 echo "$ShowText"
 fi

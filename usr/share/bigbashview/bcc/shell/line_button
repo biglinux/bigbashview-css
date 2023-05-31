@@ -5,6 +5,7 @@ line_button() {
     if [ "$1" = "help" ]; then
         echo "Usage: ${0##*/} [options]"
         echo '    text="text"          Line text'
+        echo '    fontSize="number"    value: 1~6'
         echo '    icon="icon.svg"      icon file'
         echo '    buttonType="type"    variable: primary, secondary, success, danger, warning, info, light, dark, link'
         echo '    buttonText="text"    Button text'
@@ -33,6 +34,11 @@ if [ -z "$bgColor" ];then
     bgColor=secondary
 fi
 
+#fontSize
+if [ -n "$fontSize" ];then
+    fontSize="6"
+fi
+
 border="${border:+border border-$border}"
 # iconSize="${iconSize:+$iconSize-px}"
 # bgColor="${bgColor:+bg-$bgColor}"
@@ -41,7 +47,7 @@ read -d $'' ShowText <<EOF
 <div class="row align-items-center bg-$bgColor text-white rounded py-3 mx-5 $border $class">
     <div class="col .col-sm-8 d-flex align-items-center">
         <img src="./$icon" width="$iconSize-px" height="$iconSize-px" class="mx-1"/>
-        <label class="form-check-label text-body cursor-pointer ms-1" for="flexSwitchCheckDefault">$text</label>
+        <label class="form-check-label text-body cursor-pointer ms-1 fs-$fontSize" for="flexSwitchCheckDefault">$text</label>
     </div>
     <div class="col-6 col-sm-4 d-flex justify-content-end">
 EOF
