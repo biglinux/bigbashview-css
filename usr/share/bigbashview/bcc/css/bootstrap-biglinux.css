@@ -28,6 +28,7 @@
 	--bs-border-color: #aaaaaa !important;
 	--bs-font-sans-serif: Lato !important;
 	--bs-body-font-size: 16px !important;
+	--big-hover-bgcolor-row: rgba(255, 255, 255, 0.55);
 }
 
 ::-webkit-scrollbar {
@@ -84,3 +85,21 @@ button {
 	 *	bottom: 0 !important;*/
 }
 
+section > div.row:first-of-type {
+border-top-right-radius: 14px;
+border-top-left-radius: 14px;	
+}
+
+
+section > div.row:last-of-type {
+border-bottom-right-radius: 14px;
+border-bottom-left-radius: 14px;	
+}
+
+section > div.row {
+margin-top: -1px;	
+}
+
+section > div.row:hover {
+background-color: var(--big-hover-bgcolor-row) !important;
+}
