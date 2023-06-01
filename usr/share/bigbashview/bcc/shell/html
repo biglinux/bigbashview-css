@@ -1,21 +1,21 @@
 #!/bin/bash
 
-html() {
+if [ "$1" = "help" ]; then
+    echo "Usage: ${0##*/} [options]"
+    echo '    start="start"        start the html, import the css and js'
+    echo '    end="end"            finalize the html'
+    echo '    title="title"        page title'
+    echo '    icon="icon.svg"      page icon'
+    echo ''
+fi
+
+htmlStart() {
     local LANG=C
-    if [ "$1" = "help" ]; then
-        echo "Usage: ${0##*/} [options]"
-        echo '    start="start"        start the html, import the css and js'
-        echo '    end="end"            finalize the html'
-        echo '    title="title"        page title'
-        echo '    icon="icon.svg"      page icon'
-        echo ''
-    fi
 
 #It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
 
 
 # Function to start the HTML document
-if [ -n "$start" ];then
 read -d $'' ShowText <<EOF
 <!DOCTYPE html>
 <html>
@@ -33,8 +33,7 @@ read -d $'' ShowText <<EOF
     <body class="bg-primary">
 EOF
 echo "$ShowText"
-fi
-
+}
 
 # header
 
@@ -66,7 +65,6 @@ fi
 
 # Function to end the HTML document
 # end
-if [ -n "$end" ];then
+htmlEnd() {
 echo '</html>'
-fi
 }

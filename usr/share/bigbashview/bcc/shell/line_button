@@ -4,48 +4,90 @@ line_button() {
     local LANG=C
     if [ "$1" = "help" ]; then
         echo "Usage: ${0##*/} [options]"
-        echo '    text="text"          Line text'
-        echo '    fontSize="number"    value: 1~6'
-        echo '    icon="icon.svg"      icon file'
-        echo '    buttonType="type"    variable: primary, secondary, success, danger, warning, info, light, dark, link'
-        echo '    buttonText="text"    Button text'
-        echo '    buttonModal="modal"  if not declare modal will use default run button'
-        echo '    id="id"              id'
-        echo '    class="class"        class'
-        echo '    border="number"      value: 1~5'
-        echo '    bgColor="value"      Available: primary, secondary, success, danger, warning, info, light, dark, link'
+        echo '    text="text"                 text to the switch'
+        echo '    check="checked"             variable: unchecked, checked, disabled, checked disabled'
+        echo '    run="file.run"              File to be executed when clicking the switch'
+        echo '    icon="icon.svg"             Icon file'
+        echo '    iconSize="number"           Icon size in Pixel'
+        echo '    bgColor="value"             Available: primary, secondary, success, danger, warning, info, light, dark, link'
+        echo '    check="checked"             Available: checked, unchecked, disabled, checked disabled'
+        echo '    check2="checked"            Available: checked, unchecked, disabled, checked disabled'
+        echo '    id="id"                     id'
+        echo '    id=2"id"                    id'
+        echo '    fontSize="number"           value: 1~6'
+        echo '    border="number"             value: 1~5'
+        echo '    borderSide="Value"          Available: border-top, border-end, border-bottom, border-start'
+        echo '    borderRadius="Value"        Available: rounded, rounded-top, rounded-end, rounded-bottom, rounded-start, rounded-circle, rounded-pill'
+        echo '    borderRadiusLevel="number"  Available: 0~5'
+        echo '    margin="number"             value: 0~5, auto | for horizontal and vertical' 
+        echo '    marginTop="number"          value: 0~5, auto'
+        echo '    marginBotton="number"       value: 0~5, auto'
+        echo '    marginLeft="number"         value: 0~5, auto'
+        echo '    marginRight="number"        value: 0~5, auto'
+        echo '    marginHorizontal="number"   value: 0~5, auto'
+        echo '    marginVertical="number"     value: 0~5, auto'
+        echo '    padding="number"            value: 0~5, auto | for horizontal and vertical'
+        echo '    paddingTop="number"         value: 0~5, auto'
+        echo '    paddingBotton="number"      value: 0~5, auto'
+        echo '    paddingLeft="number"        value: 0~5, auto'
+        echo '    paddingRight="number"       value: 0~5, auto'
+        echo '    paddingHorizontal="number"  value: 0~5, auto'
+        echo '    paddingVertical="number"    value: 0~5, auto'
+        echo '    shadow="Value"              Available: shadow-none, shadow-sm, shadow, shadow-lg'
         echo ''
     fi
 
+
 #It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
+# icon=
+# text=
+# id=
+# id2=
+# run=
+# run2=
+# check=
+# check2=
+
+# Definir valor padrão para bgColor se não estiver definido
+: ${bgColor:=secondary}
+
+# Definir valor padrão para marginHorizontal se não estiver definido
+: ${marginHorizontal:=0}
+
+# Definir valor padrão para fontSize se não estiver definido
+: ${fontSize:=6}
 
 #buttonType
-if [ -z "$buttonType" ];then
-     local buttonType=primary
-fi
+: ${buttonType:=primary}
 
-#iconSize
-if [ -z "$iconSize" ];then
-     local iconSize=20
-fi
+# Definir valor padrão para iconSize se não estiver definido
+: ${iconSize:=20}
 
-#bgColor
-if [ -z "$bgColor" ];then
-     local bgColor=secondary
-fi
 
-#fontSize
-if [ -n "$fontSize" ];then
-    local fontSize="6"
-fi
-
-border="${border:+border border-$border}"
 # iconSize="${iconSize:+$iconSize-px}"
 # bgColor="${bgColor:+bg-$bgColor}"
+## fontSize="${fontSize:+h$fontSize}" ##
+local border="${border:+border border-$border}"
+local borderRadiusLevel="${borderRadiusLevel:+rounded-$borderRadiusLevel}"
+local margin="${margin:+my-$margin mx-$margin}"
+local marginTop="${marginTop:+mt-$marginTop}"
+local marginBotton="${marginBotton:+mb-$marginBotton}"
+local marginLeft="${marginLeft:+ms-$marginLeft}"
+local marginRight="${marginRight:+me-$marginRight}"
+# marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
+local marginVertical="${marginVertical:+my-$marginVertical}"
+local padding="${padding:+py-$padding px-$padding}"
+local paddingTop="${paddingTop:+pt-$paddingTop}"
+local paddingBotton="${paddingBotton:+pb-$paddingBotton}"
+local paddingLeft="${paddingLeft:+ps-$paddingLeft}"
+local paddingRight="${paddingRight:+pe-$paddingRight}"
+local paddingHorizontal="${paddingHorizontal:+px-$paddingHorizontal}"
+local paddingVertical="${paddingVertical:+py-$paddingVertical}"
 
+#abertura
 read -d $'' ShowText <<EOF
-<div class="row align-items-center bg-$bgColor text-white rounded py-3 mx-5 $border $class">
-    <div class="col .col-sm-8 d-flex align-items-center">
+<div class="row align-items-center $border $borderSide $borderRadius $borderRadiusLevel bg-$bgColor $margin $marginTop $marginBotton $marginLeft $marginRight mx-$marginHorizontal $marginVertical $padding $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical $shadow">
+  <div class="col-sm d-flex align-items-center">
         <img src="./$icon" width="$iconSize-px" height="$iconSize-px" class="mx-1"/>
         <label class="form-check-label text-body cursor-pointer ms-1 fs-$fontSize" for="flexSwitchCheckDefault">$text</label>
     </div>
@@ -73,4 +115,9 @@ read -d $'' ShowText <<EOF
 EOF
 echo "$ShowText"
 fi
+
+
+#fechamento
+echo "  </div>"
+echo "</div>"
 }

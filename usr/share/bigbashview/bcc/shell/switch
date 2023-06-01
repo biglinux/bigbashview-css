@@ -16,6 +16,9 @@ switch() {
         echo '    id=2"id"                    id'
         echo '    fontSize="number"           value: 1~6'
         echo '    border="number"             value: 1~5'
+        echo '    borderSide="Value"          Available: border-top, border-end, border-bottom, border-start'
+        echo '    borderRadius="Value"        Available: rounded, rounded-top, rounded-end, rounded-bottom, rounded-start, rounded-circle, rounded-pill'
+        echo '    borderRadiusLevel="number"  Available: 0~5'
         echo '    margin="number"             value: 0~5, auto | for horizontal and vertical' 
         echo '    marginTop="number"          value: 0~5, auto'
         echo '    marginBotton="number"       value: 0~5, auto'
@@ -30,6 +33,7 @@ switch() {
         echo '    paddingRight="number"       value: 0~5, auto'
         echo '    paddingHorizontal="number"  value: 0~5, auto'
         echo '    paddingVertical="number"    value: 0~5, auto'
+        echo '    shadow="Value"              Available: shadow-none, shadow-sm, shadow, shadow-lg'
         echo ''
     fi
 
@@ -55,12 +59,11 @@ switch() {
 
 # Definir valor padrão para fontSize se não estiver definido
 : ${fontSize:=6}
-
-
 # iconSize="${iconSize:+$iconSize-px}"
 # bgColor="${bgColor:+bg-$bgColor}"
 ## fontSize="${fontSize:+h$fontSize}" ##
 local border="${border:+border border-$border}"
+local borderRadiusLevel="${borderRadiusLevel:+rounded-$borderRadiusLevel}"
 local margin="${margin:+my-$margin mx-$margin}"
 local marginTop="${marginTop:+mt-$marginTop}"
 local marginBotton="${marginBotton:+mb-$marginBotton}"
@@ -76,9 +79,10 @@ local paddingRight="${paddingRight:+pe-$paddingRight}"
 local paddingHorizontal="${paddingHorizontal:+px-$paddingHorizontal}"
 local paddingVertical="${paddingVertical:+py-$paddingVertical}"
 
+
 #abertura
 read -d $'' ShowText <<EOF
-<div class="row align-items-center rounded $border bg-$bgColor $marginTop $marginBotton $marginLeft $marginRight mx-$marginHorizontal $marginVertical $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical">
+<div class="row align-items-center $border $borderSide $borderRadius $borderRadiusLevel bg-$bgColor $margin $marginTop $marginBotton $marginLeft $marginRight mx-$marginHorizontal $marginVertical $padding $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical $shadow">
   <div class="col-sm d-flex align-items-center">
 EOF
 echo "$ShowText"

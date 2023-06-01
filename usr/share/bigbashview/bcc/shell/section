@@ -18,14 +18,9 @@ section() {
 # start
 if [ -n "$start" ];then
 read -d $'' ShowText <<EOF
-<section class="box mt-4 mb-4">
+<section class="box mt-4 mb-4  mx-5">
 EOF
 echo "$ShowText"
-fi
-
-# end
-if [ -n "$end" ];then
-echo "</section>"
 fi
 
 #fontSize
@@ -38,8 +33,13 @@ fi
 # text
 if [ -n "$text" ];then
 read -d $'' ShowText <<EOF
-<$fontSize class="mb-2 mt-3 mx-5">$text</$fontSize>
+<$fontSize class="mb-2 mt-3">$text</$fontSize>
 EOF
 echo "$ShowText"
+fi
+
+# end
+if [ -n "$end" ];then
+echo "</section>"
 fi
 }
