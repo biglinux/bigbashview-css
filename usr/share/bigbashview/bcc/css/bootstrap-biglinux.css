@@ -1,5 +1,7 @@
 :root {
-  /* Colors */
+  /* Colors
+	https://getbootstrap.com/docs/5.3/customize/color
+  */
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
 	--bs-purple: #6f42c1;
@@ -15,21 +17,40 @@
 	--bs-gray: #6c757d;
 	--bs-gray-dark: #343a40;
 
-  /* Colors RGB */
-	--bs-primary-rgb: rgb(206, 208, 210);
-	--bs-secondary-rgb: rgb(224, 224, 226);
-	--bs-success-rgb: rgb(25, 135, 84);
-	--bs-info-rgb: rgb(13, 202, 240);
-	--bs-warning-rgb: rgb(255, 193, 7);
-	--bs-danger-rgb: rgb(220, 53, 69);
-	--bs-light-rgb: rgb(248, 249, 250);
-	--bs-dark-rgb: rgb(33, 37, 41);
-	--bs-white-rgb: rgb(255, 255, 255);
-	--bs-black-rgb: rgb(0, 0, 0);
-	--bs-body-color-rgb: rgb(68, 68, 68);
-	--bs-body-bg-rgb: rgb(255, 255, 255);
-	--bs-border-color: rgb(255, 255, 255);
-	--big-hover-bgcolor-row: rgba(255, 255, 255, 0.55);
+	/* Colors KDEGlobals */
+
+	/* Window:BackgroundNormal */
+  --bs-body-bg-rgb: 255,255,255;
+
+	/* Window:ForegroundNormal */
+  --bs-body-color-rgb: 68,68,68;
+
+	/* Selection:BackgroundNormal */
+	--bs-primary-rgb: 206,208,210;
+
+  /* View:BackgroundAlternate; */
+	--bs-secondary-rgb: 224,224,226;
+
+  /* ActiveForeground */
+	--bs-emphasis-color-rgb: 173,181,189;
+
+  /* PositiveForeground */
+	--bs-success-rgb: 25,135,84;
+
+  /* SelectionBackgroundNormal */
+	--bs-info-rgb: 13,202,240;
+
+  /* NegativeForeground */
+	--bs-warning-rgb: 255,193,7;
+
+  /* NeutralForeground */
+	--bs-danger-rgb: 220,53,69;
+
+	--bs-light-rgb: 248,249,250;
+	--bs-dark-rgb: 33,37,41;
+	--bs-white-rgb: 255,255,255;
+	--bs-black-rgb: 0,0,0;
+	--bs-border-color: 255,255,255;
 
   /* Typography */
 	--bs-font-sans-serif: Lato, sans-serif;
@@ -38,13 +59,13 @@
   /* Scrollbar */
   --bs-scrollbar-width: 12px;
   --bs-scrollbar-height: 8px;
-  --bs-scrollbar-bg: var(--bs-primary-rgb);
-  --bs-scrollbar-thumb-bg: var(--bs-blue);
+  --bs-scrollbar-bg-rgb: var(--bs-primary-rgb);
+  --bs-scrollbar-thumb-bg-rgb: var(--bs-blue);
   --bs-scrollbar-thumb-border-radius: 1ex;
   --bs-scrollbar-thumb-box-shadow: 0 1px 2px rgba(0, 0, 0, .75);
 
   /* Row */
-  --bs-row-bg-hover: rgba(255, 255, 255, 0.55);
+  --bs-row-bg-rgb-hover: rgba(255, 255, 255, 0.55);
   --bs-row-border-radius: 14px;
 
   /* Button */
@@ -57,30 +78,30 @@
   --bs-checkbox-height: 26px;
 
   /* Card */
-	--bs-card-border: border: 1px solid #0d6efd;
-	--bs-card-box-shadow: 0px 0px 15px 1px #0d6efd;
+	--bs-card-border-hover: 1px solid var(--bs-blue);
+	--bs-card-box-shadow-hover: 0 0 15px var(--bs-blue);
   --bs-card-transition: all 300ms;
   --bs-card-title-margin: -16px inherit;
   --bs-card-text-margin: -16px inherit;
 }
 
+body {
+  background: var(--bs-body-bg-rgb) !important;
+  color: var(--bs-body-color-rgb) !important;
+  margin: var(--size-1);
+}
+
 ::-webkit-scrollbar {
-	width: var(--bs-scrollbar-width);
-	height: var(--bs-scrollbar-height);
-	background: var(--bs-scrollbar-bg);
+	width: var(--bs-scrollbar-width) !important;
+	height: var(--bs-scrollbar-height) !important;
+	background: var(--bs-scrollbar-bg-rgb) !important;
 }
 
 ::-webkit-scrollbar-thumb {
-	-webkit-border-radius: var(--bs-scrollbar-thumb-border-radius);
-	-webkit-box-shadow: var(--bs-scrollbar-thumb-box-shadow);
-	background: var(--bs-scrollbar-thumb-bg);
+	-webkit-border-radius: var(--bs-scrollbar-thumb-border-radius) !important;
+	-webkit-box-shadow: var(--bs-scrollbar-thumb-box-shadow) !important;
+	background: var(--bs-scrollbar-thumb-bg-rgb) !important;
 }
-
-/*
-::-webkit-scrollbar-corner {
-  background: var(--bs-black);
-}
-*/
 
 button {
 	height: var(--bs-button-height) !important;
@@ -93,48 +114,35 @@ button {
   height: var(--bs-checkbox-height) !important;
 }
 
-/*
-.nav-link {
-  height: 2px !important;
-}
-*/
-
 .card {
 	transition: var(--bs-card-transition) !important;
-}
 
-.card:hover {
-	border: 1px solid var(--bs-card-border) !important;
-	box-shadow: var(--bs-card-box-shadow) !important;
-}
+	&:hover {
+		border: var(--bs-card-border-hover) !important;
+    box-shadow: var(--bs-card-box-shadow-hover) !important;
+	}
 
-.card-title {
-	margin: var(--bs-card-title-margin) !important;
-}
+	& .card-title {
+		margin: var(--bs-card-title-margin) !important;
+	}
 
-.card-text {
-	margin: var(--bs-card-text-margin) !important;
-	/*
-  position: absolute !important;
-  left: 0 !important;
-  bottom: 0 !important;
-   */
-}
-
-section > div.row:first-of-type {
-  border-radius: var(--bs-section-row-border-radius) var(--bs-section-row-border-radius)
-  inherit inherit !important;
-}
-
-section > div.row:last-of-type {
-  border-radius: inherit inherit
-  var(--bs-section-row-border-radius) var(--bs-section-row-border-radius) !important;
+	& .card-text {
+		margin: var(--bs-card-text-margin) !important;
+	}
 }
 
 section > div.row {
-  margin-top: -1px !important;	
-}
+  margin-top: -1px !important;
 
-section > div.row:hover {
-  background: var(--bs-row-bg-hover) !important;
+	&:first-of-type {
+		border-radius: var(--bs-section-row-border-radius) inherit !important;
+	}
+
+	&:last-of-type {
+		border-radius: inherit var(--bs-section-row-border-radius) !important;
+	}
+
+	&:hover {
+		background: var(--bs-row-bg-rgb-hover) !important;
+	}
 }
