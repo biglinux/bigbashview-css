@@ -60,7 +60,7 @@
   --bs-scrollbar-width: 12px;
   --bs-scrollbar-height: 8px;
   --bs-scrollbar-bg-rgb: var(--bs-primary-rgb);
-  --bs-scrollbar-thumb-bg-rgb: var(--bs-blue);
+  --bs-scrollbar-thumb-bg-rgb: var(--bs-primary-rgb);
   --bs-scrollbar-thumb-border-radius: 1ex;
   --bs-scrollbar-thumb-box-shadow: 0 1px 2px rgba(0, 0, 0, .75);
 
@@ -78,8 +78,8 @@
   --bs-checkbox-height: 26px;
 
   /* Card */
-	--bs-card-border-hover: 1px solid var(--bs-blue);
-	--bs-card-box-shadow-hover: 0 0 15px var(--bs-blue);
+	--bs-card-border-hover: 1px solid var(--bs-primary-rgb);
+	--bs-card-box-shadow-hover: 0 0 15px var(--bs-primary-rgb);
   --bs-card-transition: all 300ms;
   --bs-card-title-margin: -16px inherit;
   --bs-card-text-margin: -16px inherit;
