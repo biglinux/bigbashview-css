@@ -33,24 +33,24 @@ main() {
   local negative_fg=$(get_color "Colors:Window" "ForegroundNegative")
   local visited_fg=$(get_color "Colors:Window" "ForegroundVisited")
 
-  echo "Update css file..."
-  update_css "--bs-body-bg-rgb" "${window_bg}" 
-  update_css "--bs-body-color-rgb" "${window_fg}" 
-	update_css "--bs-primary-rgb" "${selection_bg}"
-	update_css "--bs-secondary-rgb" "${view_bg_alt}"
-	update_css "--bs-emphasis-color-rgb" "${active_fg}"
-	update_css "--bs-success-rgb" "${positive_fg}"
-	update_css "--bs-info-rgb" "${link_fg}"
-	update_css "--bs-warning-rgb" "${neutral_fg}"
-	update_css "--bs-danger-rgb" "${negative_fg}"
+  echo "Update css variables with kdeglobals colors..."
+  update_css "bs-body-bg-rgb" "${window_bg}"
+  update_css "bs-body-color-rgb" "${window_fg}"
+	update_css "bs-primary-rgb" "${selection_bg}"
+	update_css "bs-secondary-rgb" "${view_bg_alt}"
+	update_css "bs-emphasis-color-rgb" "${active_fg}"
+	update_css "bs-success-rgb" "${positive_fg}"
+	update_css "bs-info-rgb" "${link_fg}"
+	update_css "bs-warning-rgb" "${neutral_fg}"
+	update_css "bs-danger-rgb" "${negative_fg}"
 }
 
 get_color() {
-  kreadconfig5 --file ${kdeglobals_filepath} --group ${2} --key ${3}
+  kreadconfig5 --file ${kdeglobals_filepath} --group ${1} --key ${2}
 }
 
 update_css() {
-  sed -E "s/${1}/${2}/" "${css_filepath}"
+  sed -Ei "s/(--${1}: ).*/\1${2};/" "${css_filepath}" >/dev/null
 }
 
 main

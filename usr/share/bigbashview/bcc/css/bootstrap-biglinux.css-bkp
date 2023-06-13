@@ -20,31 +20,31 @@
 	/* Colors KDEGlobals */
 
 	/* Window:BackgroundNormal */
-  --bs-body-bg-rgb: #23272e;
+  --bs-body-bg-rgb: 255,255,255;
 
 	/* Window:ForegroundNormal */
-  --bs-body-color-rgb: #abb2bf;
+  --bs-body-color-rgb: 68,68,68;
 
 	/* Selection:BackgroundNormal */
-	--bs-primary-rgb: #323842;
+	--bs-primary-rgb: 206,208,210;
 
   /* View:BackgroundAlternate; */
-	--bs-secondary-rgb: #1e2227;
+	--bs-secondary-rgb: 224,224,226;
 
   /* ActiveForeground */
-	--bs-emphasis-color-rgb: #abb2bf;
+	--bs-emphasis-color-rgb: 173,181,189;
 
   /* PositiveForeground */
-	--bs-success-rgb: #98c379;
+	--bs-success-rgb: 25,135,84;
 
   /* SelectionBackgroundNormal */
-	--bs-info-rgb: #61afef;
+	--bs-info-rgb: 13,202,240;
 
   /* NegativeForeground */
-	--bs-warning-rgb: #d19a66;
+	--bs-warning-rgb: 255,193,7;
 
   /* NeutralForeground */
-	--bs-danger-rgb: #e06c75;
+	--bs-danger-rgb: 220,53,69;
 
 	--bs-light-rgb: 248,249,250;
 	--bs-dark-rgb: 33,37,41;
