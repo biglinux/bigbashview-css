@@ -50,7 +50,7 @@ get_color() {
 }
 
 update_css() {
-  sed -Ei "s/(--${1}: ).*/\1${2};/" "${css_filepath}" >/dev/null
+  sed -Ei "s/(--${1}: ).*/\1${2};/" "${css_filepath}"
 }
 
 main
