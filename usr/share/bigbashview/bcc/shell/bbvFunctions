@@ -6,3 +6,4 @@
 . /usr/share/bigbashview/bcc/shell/modal
 . /usr/share/bigbashview/bcc/shell/line_button
 . /usr/share/bigbashview/bcc/shell/grid
+. /usr/share/bigbashview/bcc/shell/filterRow

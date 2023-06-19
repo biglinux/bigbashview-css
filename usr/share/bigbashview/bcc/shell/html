@@ -27,8 +27,8 @@ read -d $'' ShowText <<EOF
         <link rel="stylesheet" href="/usr/share/bigbashview/bcc/css/bootstrap-biglinux.css">
         <link rel="stylesheet" href="/usr/share/javascript/bootstrap/css/bootstrap.css">
         <script src="/usr/share/javascript/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="/usr/share/bigbashview/bcc/js/biglinux.js"></script>
         <script src="/usr/share/bigbashview/bcc/js/jquery-3.7.0.js"></script>
+        <script src="/usr/share/bigbashview/bcc/js/htmx.js"></script>
     </head>
     <body class="bg-primary">
 EOF
