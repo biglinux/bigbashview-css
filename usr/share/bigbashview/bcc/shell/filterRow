@@ -1,19 +1,13 @@
 #!/bin/bash
 
-switch() {
+filterRow() {
     local LANG=C
     if [ "$1" = "help" ]; then
         echo "Usage: ${0##*/} [options]"
-        echo '    text="text"                 text to the switch'
-        echo '    check="checked"             variable: unchecked, checked, disabled, checked disabled'
-        echo '    run="file.run"              File to be executed when clicking the switch'
-        echo '    icon="icon.svg"             Icon file'
-        echo '    iconSize="number"           Icon size in Pixel'
+        echo '    text="text"          text to show inner input text'
+        echo '    justify="Value"      Available: left, center, right'
+        echo '    width="Value"        Available: 25, 50, 75, 100'
         echo '    bgColor="value"             Available: primary, secondary, success, danger, warning, info, light, dark, link'
-        echo '    check="checked"             Available: checked, unchecked, disabled, checked disabled'
-        echo '    check2="checked"            Available: checked, unchecked, disabled, checked disabled'
-        echo '    id="id"                     id'
-        echo '    id=2"id"                    id'
         echo '    fontSize="number"           value: 1~6'
         echo '    border="number"             value: 1~5'
         echo '    borderSide="Value"          Available: border-top, border-end, border-bottom, border-start'
@@ -34,24 +28,10 @@ switch() {
         echo '    paddingHorizontal="number"  value: 0~5, auto'
         echo '    paddingVertical="number"    value: 0~5, auto'
         echo '    shadow="Value"              Available: shadow-none, shadow-sm, shadow, shadow-lg'
-        echo '    reload="autoReload"         Available: shadow-none, shadow-sm, shadow, shadow-lg'
         echo ''
     fi
-
-
-#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
-# icon=
-# text=
-# id=
-# id2=
-# run=
-# run2=
-# check=
-# check2=
-
-# Definir valor padrão para iconSize se não estiver definido
-: ${iconSize:=20}
-
+    
+    
 # Definir valor padrão para bgColor se não estiver definido
 : ${bgColor:=secondary}
 
@@ -60,9 +40,7 @@ switch() {
 
 # Definir valor padrão para fontSize se não estiver definido
 : ${fontSize:=6}
-# iconSize="${iconSize:+$iconSize-px}"
-# bgColor="${bgColor:+bg-$bgColor}"
-## fontSize="${fontSize:+h$fontSize}" ##
+
 local border="${border:+border border-$border}"
 local borderRadiusLevel="${borderRadiusLevel:+rounded-$borderRadiusLevel}"
 local margin="${margin:+my-$margin mx-$margin}"
@@ -70,7 +48,7 @@ local marginTop="${marginTop:+mt-$marginTop}"
 local marginBotton="${marginBotton:+mb-$marginBotton}"
 local marginLeft="${marginLeft:+ms-$marginLeft}"
 local marginRight="${marginRight:+me-$marginRight}"
-# marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
+local marginHorizontal="${marginHorizontal:+mx-$marginHorizontal}"
 local marginVertical="${marginVertical:+my-$marginVertical}"
 local padding="${padding:+py-$padding px-$padding}"
 local paddingTop="${paddingTop:+pt-$paddingTop}"
@@ -81,61 +59,26 @@ local paddingHorizontal="${paddingHorizontal:+px-$paddingHorizontal}"
 local paddingVertical="${paddingVertical:+py-$paddingVertical}"
 
 
-#abertura
+#It is only necessary to declare the variables that need changes in the content, the file that calls this script already creates the variable that will be used in the script
 read -d $'' ShowText <<EOF
-<div class="row align-items-center $border $borderSide $borderRadius $borderRadiusLevel bg-$bgColor $margin $marginTop $marginBotton $marginLeft $marginRight mx-$marginHorizontal $marginVertical $padding $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical $shadow">
-  <div class="col-sm d-flex align-items-center">
+
+<script>
+\$(document).ready(function(){
+  \$("#filterRow").on("keyup", function() {
+    var value = \$(this).val().toLowerCase();
+    \$(".row").filter(function() {
+      // ignore if inner .modal
+      if (\$(this).parents(".modal").length === 0) {
+        \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1);
+      }
+    });
+  });
+});
+</script>
+
+<div class="d-flex justify-content-$justify">
+    <input class="form-control w-$width justify-content-$justify $border $borderSide $borderRadius $borderRadiusLevel bg-$bgColor $margin $marginTop $marginBotton $marginLeft $marginRight mx-$marginHorizontal $marginVertical $padding $paddingTop $paddingBotton $paddingLeft $paddingRight $paddingHorizontal $paddingVertical $shadow" id="filterRow" type="text" placeholder="$text">
+</div>
 EOF
 echo "$ShowText"
-
-#se tiver icone
-if [ -n "$icon" ];then
-read -d $'' ShowText <<EOF
-    <img src="$icon" width="$iconSize-px" height="$iconSize-px" class="mx-1 me-2"/>
-EOF
-echo "$ShowText"
-fi
-
-#se tiver texto
-if [ -n "$text" ];then
-read -d $'' ShowText <<EOF
-    <label class="form-check-label fs-$fontSize" for="$id">$text</label>
-EOF
-echo "$ShowText"
-fi
-
-#fechamento 
-echo '</div>'
-
-if [[ $run =~ \.sh\.htm ]]; then
-    enableReload='hx-target="closest .row" hx-swap="outerHTML"'
-else
-    enableReload=''
-fi
-
-#botão switch
-read -d $'' ShowText <<EOF
-    <div class="col-sm d-flex align-items-center justify-content-end">
-        <form class="form-check form-switch">
-            <input class="form-check-input" hx-get="$run" $enableReload type="checkbox" role="switch" id="$id" $check/>
-        </form>
-    </div>
-EOF
-echo "$ShowText"
-
-#botão switch2
-if [ -n "$check2" ];then
-read -d $'' ShowText <<EOF
-    <div class="col-sm d-flex align-items-center justify-content-end">
-        <form class="form-check form-switch ms-2">
-            <input class="form-check-input" hx-get="$run" $enableReload type="checkbox" role="switch" id="$id2" $check2/>
-        </form>
-    </div>
-EOF
-echo "$ShowText"
-fi
-
-#fechamento
-echo "  </div>"
-echo "</div>"
 }
