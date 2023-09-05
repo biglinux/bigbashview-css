@@ -1,57 +1,49 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o pipefail
-set -o nounset
-
-src_dir="$(cd $(dirname $0) && pwd)"
-kdeglobals_filepath="$HOME/.config/kdeglobals"
-css_filepath="${src_dir}/bootstrap-biglinux.css"
-
 main() {
   echo "Getting kdeglobals colors..."
 
   # Window
-  local window_bg=$(get_color "Colors:Window" "BackgroundNormal")
-  local window_fg=$(get_color "Colors:Window" "ForegroundNormal")
+  local window_bg=$(get_color "Window" "BackgroundNormal")
+  local window_fg=$(get_color "Window" "ForegroundNormal")
 
   # View
-  local view_bg=$(get_color "Colors:View" "BackgroundNormal")
-  local view_bg_alt=$(get_color "Colors:View" "BackgroundAlternate")
-  local view_fg=$(get_color "Colors:View" "ForegroundNormal")
+  local view_bg=$(get_color "View" "BackgroundNormal")
+  local view_bg_alt=$(get_color "View" "BackgroundAlternate")
+  local view_fg=$(get_color "View" "ForegroundNormal")
 
   # Selection
-  local selection_bg=$(get_color "Colors:Selection" "BackgroundNormal")
-  local selection_fg=$(get_color "Colors:Selection" "ForegroundNormal")
+  local selection_bg=$(get_color "Selection" "BackgroundNormal")
+  local selection_fg=$(get_color "Selection" "ForegroundNormal")
 
   # Special Texts
-  local link_fg=$(get_color "Colors:Window" "ForegroundLink")
-  local active_fg=$(get_color "Colors:Window" "ForegroundActive")
-  local inactive_fg=$(get_color "Colors:Window" "ForegroundInactive")
-  local positive_fg=$(get_color "Colors:Window" "ForegroundPositive")
-  local neutral_fg=$(get_color "Colors:Window" "ForegroundNeutral")
-  local negative_fg=$(get_color "Colors:Window" "ForegroundNegative")
-  local visited_fg=$(get_color "Colors:Window" "ForegroundVisited")
+  local link_fg=$(get_color "Window" "ForegroundLink")
+  local active_fg=$(get_color "Window" "ForegroundActive")
+  local inactive_fg=$(get_color "Window" "ForegroundInactive")
+  local positive_fg=$(get_color "Window" "ForegroundPositive")
+  local neutral_fg=$(get_color "Window" "ForegroundNeutral")
+  local negative_fg=$(get_color "Window" "ForegroundNegative")
+  local visited_fg=$(get_color "Window" "ForegroundVisited")
 
   echo "Update css variables with kdeglobals colors..."
-  update_css "bs-body-bg-rgb" "${window_bg}"
-  update_css "bs-body-color-rgb" "${window_fg}"
-	update_css "bs-primary-rgb" "${selection_bg}"
-	update_css "bs-secondary-rgb" "${view_bg_alt}"
-	update_css "bs-emphasis-color-rgb" "${active_fg}"
-	update_css "bs-success-rgb" "${positive_fg}"
-	update_css "bs-info-rgb" "${link_fg}"
-	update_css "bs-warning-rgb" "${neutral_fg}"
-	update_css "bs-danger-rgb" "${negative_fg}"
+  update_css "bs-body-bg-rgb" $window_bg
+  update_css "bs-body-color-rgb" $window_fg
+  update_css "bs-primary-rgb" $selection_bg
+  update_css "bs-secondary-rgb" $view_bg_alt
+  update_css "bs-emphasis-color-rgb" $active_fg
+  update_css "bs-success-rgb" $positive_fg
+  update_css "bs-info-rgb" $link_fg
+  update_css "bs-warning-rgb" $neutral_fg
+  update_css "bs-danger-rgb" $negative_fg
 }
 
 get_color() {
-  kreadconfig5 --file ${kdeglobals_filepath} --group ${1} --key ${2}
+  kreadconfig5 --file $HOME/.config/kdeglobals --group Colors:${1} --key ${2}
 }
 
 update_css() {
-  sed -Ei "s/(--${1}: ).*/\1${2};/" "${css_filepath}"
+  sed -Ei "s/(--${1}: ).*/\1${2};/" "${0%/*}/bootstrap-biglinux.css"
 }
 
 main
-
+echo "Done."
