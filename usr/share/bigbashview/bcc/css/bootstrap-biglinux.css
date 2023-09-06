@@ -1,6 +1,9 @@
 :root {
-	--bs-blue: #0d6efd;
-	--bs-indigo: #6610f2;
+  /* Colors
+	https://getbootstrap.com/docs/5.3/customize/color
+  */
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
 	--bs-purple: #6f42c1;
 	--bs-pink: #d63384;
 	--bs-red: #dc3545;
@@ -13,93 +16,133 @@
 	--bs-white: #fff;
 	--bs-gray: #6c757d;
 	--bs-gray-dark: #343a40;
-	--bs-primary-rgb: 206, 208, 210 !important;
-	--bs-secondary-rgb: 224, 224, 226 !important;
-	--bs-success-rgb: 25, 135, 84 !important;
-	--bs-info-rgb: 13, 202, 240 !important;
-	--bs-warning-rgb: 255, 193, 7 !important;
-	--bs-danger-rgb: 220, 53, 69 !important;
-	--bs-light-rgb: 248, 249, 250 !important;
-	--bs-dark-rgb: 33, 37, 41 !important;
-	--bs-white-rgb: 255, 255, 255 !important;
-	--bs-black-rgb: 0, 0, 0 !important;
-	--bs-body-color-rgb: 68, 68, 68 !important;
-	--bs-body-bg-rgb: 255, 255, 255 !important;
-	--bs-border-color: #aaaaaa !important;
-	--bs-font-sans-serif: Lato !important;
-	--bs-body-font-size: 16px !important;
-	--big-hover-bgcolor-row: rgba(255, 255, 255, 0.55);
+
+	/* Colors KDEGlobals */
+
+	/* Window:BackgroundNormal */
+  --bs-body-bg-rgb: #23272e;
+
+	/* Window:ForegroundNormal */
+  --bs-body-color-rgb: #abb2bf;
+
+	/* Selection:BackgroundNormal */
+	--bs-primary-rgb: #323842;
+
+  /* View:BackgroundAlternate; */
+	--bs-secondary-rgb: #1e2227;
+
+  /* ActiveForeground */
+	--bs-emphasis-color-rgb: #abb2bf;
+
+  /* PositiveForeground */
+	--bs-success-rgb: #98c379;
+
+  /* SelectionBackgroundNormal */
+	--bs-info-rgb: #61afef;
+
+  /* NegativeForeground */
+	--bs-warning-rgb: #d19a66;
+
+  /* NeutralForeground */
+	--bs-danger-rgb: #e06c75;
+
+	--bs-light-rgb: 248,249,250;
+	--bs-dark-rgb: 33,37,41;
+	--bs-white-rgb: 255,255,255;
+	--bs-black-rgb: 0,0,0;
+	--bs-border-color: 255,255,255;
+
+  /* Typography */
+	--bs-font-sans-serif: Lato, sans-serif;
+	--bs-body-font-size: 16px;
+
+  /* Scrollbar */
+  --bs-scrollbar-width: 12px;
+  --bs-scrollbar-height: 8px;
+  --bs-scrollbar-bg-rgb: var(--bs-primary-rgb);
+  --bs-scrollbar-thumb-bg-rgb: var(--bs-primary-rgb);
+  --bs-scrollbar-thumb-border-radius: 1ex;
+  --bs-scrollbar-thumb-box-shadow: 0 1px 2px rgba(0, 0, 0, .75);
+
+  /* Row */
+  --bs-row-bg-rgb-hover: rgba(255, 255, 255, 0.55);
+  --bs-row-border-radius: 14px;
+
+  /* Button */
+  --bs-button-height: 28px;
+  --bs-button-padding: 0px 22px;
+  --bs-button-border-radius: 20px;
+
+  /* Checkbox */
+  --bs-checkbox-width: 36px;
+  --bs-checkbox-height: 26px;
+
+  /* Card */
+	--bs-card-border-hover: 1px solid var(--bs-primary-rgb);
+	--bs-card-box-shadow-hover: 0 0 15px var(--bs-primary-rgb);
+  --bs-card-transition: all 300ms;
+  --bs-card-title-margin: -16px inherit;
+  --bs-card-text-margin: -16px inherit;
+}
+
+body {
+  background: var(--bs-body-bg-rgb) !important;
+  color: var(--bs-body-color-rgb) !important;
+  margin: var(--size-1);
 }
 
 ::-webkit-scrollbar {
-	height: 12px;
-	width: 8px;
-	background: var(--bs-primary-rgb);
+	width: var(--bs-scrollbar-width) !important;
+	height: var(--bs-scrollbar-height) !important;
+	background: var(--bs-scrollbar-bg-rgb) !important;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--bs-blue);
-	-webkit-border-radius: 1ex;
-	-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+	-webkit-border-radius: var(--bs-scrollbar-thumb-border-radius) !important;
+	-webkit-box-shadow: var(--bs-scrollbar-thumb-box-shadow) !important;
+	background: var(--bs-scrollbar-thumb-bg-rgb) !important;
 }
 
-/*::-webkit-scrollbar-corner {
- *	background: #000;
- * }*/
-
 button {
-	border-radius: 20px !important;
-	height: 28px !important;
-	padding: 0px 22px !important;
+	height: var(--bs-button-height) !important;
+	padding: var(--bs-button-padding) !important;
+	border-radius: var(--bs-button-border-radius) !important;
 }
 
 .form-check-input[type=checkbox] {
-	width: 36px !important;
-	height: 20px !important;
+  width: var(--bs-checkbox-width) !important;
+  height: var(--bs-checkbox-height) !important;
 }
-
-/*.nav-link {
- *	height: 2px !important;
- *	
- * }*/
 
 .card {
-	transition: all 300ms !important;
-}
+	transition: var(--bs-card-transition) !important;
 
-.card:hover {
-	box-shadow: 0px 0px 15px 1px #0d6efd !important;
-	border: 1px solid #0d6efd !important;
-}
+	&:hover {
+		border: var(--bs-card-border-hover) !important;
+    box-shadow: var(--bs-card-box-shadow-hover) !important;
+	}
 
-.card-title {
-	margin-top: -16px !important;
-	margin-bottom: -16px !important;
-}
+	& .card-title {
+		margin: var(--bs-card-title-margin) !important;
+	}
 
-.card-text {
-	margin-top: -16px !important;
-	margin-bottom: -16px !important;
-	/*position: absolute !important;
-	 *	left: 0 !important;
-	 *	bottom: 0 !important;*/
-}
-
-section > div.row:first-of-type {
-border-top-right-radius: 14px;
-border-top-left-radius: 14px;	
-}
-
-
-section > div.row:last-of-type {
-border-bottom-right-radius: 14px;
-border-bottom-left-radius: 14px;	
+	& .card-text {
+		margin: var(--bs-card-text-margin) !important;
+	}
 }
 
 section > div.row {
-margin-top: -1px;	
-}
+  margin-top: -1px !important;
 
-section > div.row:hover {
-background-color: var(--big-hover-bgcolor-row) !important;
+	&:first-of-type {
+		border-radius: var(--bs-section-row-border-radius) inherit !important;
+	}
+
+	&:last-of-type {
+		border-radius: inherit var(--bs-section-row-border-radius) !important;
+	}
+
+	&:hover {
+		background: var(--bs-row-bg-rgb-hover) !important;
+	}
 }

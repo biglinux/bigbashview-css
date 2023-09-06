@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+main() {
+  echo "Getting kdeglobals colors..."
+
+  # Window
+  local window_bg=$(get_color "Window" "BackgroundNormal")
+  local window_fg=$(get_color "Window" "ForegroundNormal")
+
+  # View
+  local view_bg=$(get_color "View" "BackgroundNormal")
+  local view_bg_alt=$(get_color "View" "BackgroundAlternate")
+  local view_fg=$(get_color "View" "ForegroundNormal")
+
+  # Selection
+  local selection_bg=$(get_color "Selection" "BackgroundNormal")
+  local selection_fg=$(get_color "Selection" "ForegroundNormal")
+
+  # Special Texts
+  local link_fg=$(get_color "Window" "ForegroundLink")
+  local active_fg=$(get_color "Window" "ForegroundActive")
+  local inactive_fg=$(get_color "Window" "ForegroundInactive")
+  local positive_fg=$(get_color "Window" "ForegroundPositive")
+  local neutral_fg=$(get_color "Window" "ForegroundNeutral")
+  local negative_fg=$(get_color "Window" "ForegroundNegative")
+  local visited_fg=$(get_color "Window" "ForegroundVisited")
+
+  echo "Update css variables with kdeglobals colors..."
+  update_css "bs-body-bg-rgb" $window_bg
+  update_css "bs-body-color-rgb" $window_fg
+  update_css "bs-primary-rgb" $selection_bg
+  update_css "bs-secondary-rgb" $view_bg_alt
+  update_css "bs-emphasis-color-rgb" $active_fg
+  update_css "bs-success-rgb" $positive_fg
+  update_css "bs-info-rgb" $link_fg
+  update_css "bs-warning-rgb" $neutral_fg
+  update_css "bs-danger-rgb" $negative_fg
+}
+
+get_color() {
+  kreadconfig5 --file $HOME/.config/kdeglobals --group Colors:${1} --key ${2}
+}
+
+update_css() {
+  sed -Ei "s/(--${1}: ).*/\1${2};/" "${0%/*}/bootstrap-biglinux.css"
+}
+
+main
+
+echo "Done."
